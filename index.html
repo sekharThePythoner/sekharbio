@@ -7,7 +7,17 @@
   <meta name="description" content="Sekhar Yadav — student, learner, aspiring AI dev." />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    :root{--bg:#07080a;--accent:#19d3ff;--accent2:#6ae3ff;--muted:rgba(230,238,248,0.75);--card:rgba(255,255,255,0.03)}
+    :root{
+      --bg:#07080a;
+      --accent:#19d3ff;
+      --accent2:#6ae3ff;
+      --muted:rgba(230,238,248,0.75);
+      --card:rgba(255,255,255,0.03);
+      --gold: #d4af37;
+      --elite: #7bd389;
+      --pro: #5aa6ff;
+      --newbie: #8b8b8b;
+    }
     *{box-sizing:border-box}
     html,body{height:100%;margin:0;background:linear-gradient(180deg,#050607 0%, #071018 70%);font-family:Poppins,system-ui,Arial;color:#e6eef8}
     a{color:inherit}
@@ -44,12 +54,53 @@
     .sport-text{flex:1}
     .fav-list{margin-top:8px;color:var(--muted)}
 
+    /* ----- Bros Section styles (added) ----- */
+    .bros-toggle{display:flex;gap:12px;justify-content:center;margin-bottom:18px}
+    .bros-btn{padding:10px 14px;border-radius:12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);cursor:pointer;font-weight:800;letter-spacing:0.6px}
+    .bros-btn.active{box-shadow:0 12px 30px rgba(25,211,255,0.06);transform:translateY(-4px)}
+    .bros-note{color:var(--muted);text-align:center;margin-bottom:12px;font-weight:600}
+
+    .bros-grid{display:flex;flex-wrap:wrap;gap:18px;justify-content:center}
+    .id-card{
+      width:240px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.02);
+      border-radius:12px;
+      padding:12px;
+      text-align:left;
+      transition:transform .18s ease, box-shadow .25s ease;
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+    }
+    .id-card:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(0,0,0,0.6)}
+    .id-photo{width:86px;height:86px;border-radius:10px;overflow:hidden;flex:0 0 86px;background:#0a0a0a}
+    .id-photo img{width:100%;height:100%;object-fit:cover;display:block}
+    .id-meta{flex:1}
+    .id-meta h4{margin:0 0 6px 0;color:var(--accent2);font-size:1.05rem}
+    .id-meta p{margin:4px 0;font-size:0.88rem;color:var(--muted)}
+    .badge{
+      display:inline-block;padding:6px 10px;border-radius:999px;font-weight:800;margin-top:8px;font-size:0.78rem;
+    }
+    .badge.Supreme{background:var(--gold);color:#071018}
+    .badge.Elite{background:var(--elite);color:#071018}
+    .badge.Pro{background:var(--pro);color:#071018}
+    .badge.newbies{background:var(--newbie);color:#071018}
+
+    /* responsive tweaks */
+    @media (max-width:720px){
+      .sports-grid{grid-template-columns:1fr}
+      .id-card{width:100%}
+      .portrait{width:220px;height:220px}
+      .sport-detail img{width:140px;height:140px}
+    }
+
     audio{display:none}
   </style>
 </head>
 <body>
   <audio id="bg-music" src="bgsong.mp3" loop></audio>
- <p> tap to play phonk</p>
+  <p> tap to play phonk</p>
   <header><nav>
     <div class="brand">Sekhar</div>
     <div class="navlinks">
@@ -118,13 +169,191 @@
             <button class="sport-btn" data-sport="football">Football</button>
             <button class="sport-btn" data-sport="muaythai">Muaythai</button>
             <button class="sport-btn" data-sport="sambo">Sambo</button>
-            <button class="sport-btn" data-sport="bjj">Brazilian jiu jutsu</button>
+            <button class="sport-btn" data-sport="bjj">Brazilian Jiu Jitsu</button>
             <button class="sport-btn" data-sport="motogp">Moto GP</button>
           </div>
         </div>
         <div id="sports-details"></div>
       </div>
     </section>
+
+    <!-- ====== ADDED: BROS SECTION ====== -->
+    <section id="bros">
+      <h3>My Bros</h3>
+      <div class="bros-toggle">
+        <button id="btn-offline" class="bros-btn active" onclick="showBros('offline')">Offline Bros</button>
+        <button id="btn-online" class="bros-btn" onclick="showBros('online')">Online Bros</button>
+      </div>
+      <div class="bros-note">BADGE ARE ACC. TO FRNDSHIP YRS</div>
+
+      <!-- Offline bros -->
+      <div id="bros-offline" class="bros-grid" style="display:flex;">
+        <div class="id-card">
+          <div class="id-photo"><img src="sayon.jpg" alt="SAHAN"></div>
+          <div class="id-meta">
+            <h4>SAHAN</h4>
+            <p>Broship since: 2014</p>
+            <p>Age: 17 (2025)</p>
+            <p>Address: ASSAM</p>
+            <div class="badge Supreme">Supreme</div>
+          </div>
+        </div>
+
+        <div class="id-card">
+          <div class="id-photo"><img src="subinoy.png" alt="SUBINOY"></div>
+          <div class="id-meta">
+            <h4>SUBINOY</h4>
+            <p>Broship since: 2014</p>
+            <p>Age: 17 (2025)</p>
+            <p>Address: ASSAM</p>
+            <div class="badge Supreme">Supreme</div>
+          </div>
+        </div>
+
+        <div class="id-card">
+          <div class="id-photo"><img src="ankit.jpg" alt="ANKIT"></div>
+          <div class="id-meta">
+            <h4>ANKIT</h4>
+            <p>Broship since: 2016</p>
+            <p>Age: 17 (2025)</p>
+            <p>Address: ASSAM</p>
+            <div class="badge Elite">Elite</div>
+          </div>
+        </div>
+
+        <div class="id-card">
+          <div class="id-photo"><img src="priyo.png" alt="PRIYOJEET"></div>
+          <div class="id-meta">
+            <h4>PRIYOJEET</h4>
+            <p>Broship since: 2023</p>
+            <p>Age: 18 (2025)</p>
+            <p>Address: ASSAM</p>
+            <div class="badge Pro">Pro</div>
+          </div>
+        </div>
+
+        <div class="id-card">
+          <div class="id-photo"><img src="vikash.png" alt="VIKASH"></div>
+          <div class="id-meta">
+            <h4>VIKASH</h4>
+            <p>Broship since: 2025</p>
+            <p>Age: 16 (2025)</p>
+            <p>Address: ASSAM</p>
+            <div class="badge newbies">newbies</div>
+          </div>
+        </div>
+
+        <div class="id-card">
+          <div class="id-photo"><img src="soom.png" alt="SOOM"></div>
+          <div class="id-meta">
+            <h4>SOOM</h4>
+            <p>Broship since: 2025</p>
+            <p>Age: 16 (2025)</p>
+            <p>Address: ASSAM</p>
+            <div class="badge newbies">newbies</div>
+          </div>
+        </div>
+
+        <div class="id-card">
+          <div class="id-photo"><img src="pinak.png" alt="PINAK"></div>
+          <div class="id-meta">
+            <h4>PINAK</h4>
+            <p>Broship since: 2025</p>
+            <p>Age: 18 (2025)</p>
+            <p>Address: ASSAM</p>
+            <div class="badge newbies">newbies</div>
+          </div>
+        </div>
+
+        <div class="id-card">
+          <div class="id-photo"><img src="shiva.jpg" alt="SHIVA"></div>
+          <div class="id-meta">
+            <h4>SHIVA</h4>
+            <p>Broship since: 2025</p>
+            <p>Age: 17 (2025)</p>
+            <p>Address: ASSAM</p>
+            <div class="badge newbies">newbies</div>
+          </div>
+          <div class="id-card">
+          <div class="id-photo"><img src="romen.png" alt="ROMEN"></div>
+          <div class="id-meta">
+            <h4>ROMEN</h4>
+            <p>Broship since: 2025</p>
+            <p>Age: 17 (2025)</p>
+            <p>Address: ASSAM</p>
+            <div class="badge newbies">newbies</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Online bros (hidden by default) -->
+      <div id="bros-online" class="bros-grid" style="display:none;">
+        <div class="id-card">
+          <div class="id-photo"><img src="chitrangsh.jpeg" alt="CHITRANGSH"></div>
+          <div class="id-meta">
+            <h4>CHITRANGSH</h4>
+            <p>Broship since: Aug, 2024</p>
+            <p>Age: 20 (2025)</p>
+            <p>Address: West Bengal</p>
+            <div class="badge Supreme">Supreme</div>
+          </div>
+        </div>
+
+        <div class="id-card">
+          <div class="id-photo"><img src="raunak.jpg" alt="RAUNAK"></div>
+          <div class="id-meta">
+            <h4>RAUNAK</h4>
+            <p>Broship since: May, 2025</p>
+            <p>Age: 17 (2025)</p>
+            <p>Address: UTTARPRADESH</p>
+            <div class="badge Elite">Elite</div>
+          </div>
+        </div>
+
+        <div class="id-card">
+          <div class="id-photo"><img src="rishav.jpg" alt="RISHAV"></div>
+          <div class="id-meta">
+            <h4>RISHAV</h4>
+            <p>Broship since: June, 2025</p>
+            <p>Age: 17 (2025)</p>
+            <p>Address: ASSAM</p>
+            <div class="badge Pro">Pro</div>
+          </div>
+        </div>
+
+        <div class="id-card">
+          <div class="id-photo"><img src="randeer.jpg" alt="RANDEER"></div>
+          <div class="id-meta">
+            <h4>RANDEER</h4>
+            <p>Broship since: June, 2025</p>
+            <p>Age: 17 (2025)</p>
+            <p>Address: ASSAM</p>
+            <div class="badge Pro">Pro</div>
+          </div>
+        </div>
+
+        <div class="id-card">
+          <div class="id-photo"><img src="shubh.jpg" alt="SHUBHAM"></div>
+          <div class="id-meta">
+            <h4>SHUBHAM</h4>
+            <p>Broship since: June, 2025</p>
+            <p>Age: 17 (2025)</p>
+            <p>Address: ASSAM</p>
+            <div class="badge Pro">Pro</div>
+          </div>
+          <div class="id-card">
+          <div class="id-photo"><img src="randheer.jpg" alt="SHIBAM"></div>
+          <div class="id-meta">
+            <h4>SHIBAM</h4>
+            <p>Broship since: Aug, 2025</p>
+            <p>Age: 22 (2025)</p>
+            <p>Address: ASSAM</p>
+            <div class="badge newbies">Newbie</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ====== END BROS SECTION ====== -->
 
     <section id="contact">
       <h3>Contact</h3>
@@ -161,8 +390,33 @@
       }
     });
 
+    // play bg music once on first tap/click (keeps your previous behavior)
     const music=document.getElementById('bg-music');
     window.addEventListener('click',()=>{music.play();},{once:true});
+
+    // ----- Bros toggle logic -----
+    function showBros(which){
+      const off = document.getElementById('bros-offline');
+      const onl = document.getElementById('bros-online');
+      const btnOff = document.getElementById('btn-offline');
+      const btnOn = document.getElementById('btn-online');
+
+      if(which === 'offline'){
+        off.style.display = 'flex';
+        onl.style.display = 'none';
+        btnOff.classList.add('active');
+        btnOn.classList.remove('active');
+      } else {
+        off.style.display = 'none';
+        onl.style.display = 'flex';
+        btnOff.classList.remove('active');
+        btnOn.classList.add('active');
+      }
+      // small animation trigger
+      off.classList.remove('fade'); onl.classList.remove('fade');
+      void off.offsetWidth; void onl.offsetWidth;
+      off.classList.add('fade'); onl.classList.add('fade');
+    }
   </script>
 </body>
 </html>
