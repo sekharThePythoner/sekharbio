@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sekhar — Personal Biography</title>
+  <meta name="description" content="Sekhar Yadav — student, learner, aspiring AI dev." />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#07080a;--accent:#19d3ff;--accent2:#6ae3ff;--muted:rgba(230,238,248,0.75);--card:rgba(255,255,255,0.03)}
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,#050607 0%, #071018 70%);font-family:Poppins,system-ui,Arial;color:#e6eef8}
+    a{color:inherit}
+
+    header{position:fixed;inset:0 0 auto 0;height:72px;display:flex;align-items:center;justify-content:center;z-index:999}
+    nav{width:100%;max-width:1200px;display:flex;justify-content:space-between;align-items:center;padding:12px 20px;border-radius:14px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,0.02)}
+    .brand{font-family:Orbitron,system-ui;font-weight:700;letter-spacing:0.6px}
+    .navlinks{display:flex;gap:12px}
+    .navlinks a{padding:8px 12px;border-radius:8px;text-decoration:none;font-weight:600}
+    .navlinks a:hover{background:linear-gradient(90deg,rgba(25,211,255,0.05),transparent)}
+
+    main{padding-top:120px;z-index:2;position:relative}
+    section{max-width:1100px;margin:40px auto;padding:28px;border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,0.01),rgba(255,255,255,0.005));box-shadow:0 18px 60px rgba(2,8,20,0.6);border:1px solid rgba(255,255,255,0.02)}
+
+    .portrait{width:300px;height:300px;border-radius:18px;overflow:hidden;background:linear-gradient(180deg,#061018,#051015);display:grid;place-items:center;margin-bottom:20px}
+    .portrait img{width:100%;height:100%;object-fit:cover}
+
+    .skills{display:flex;flex-wrap:wrap;gap:10px}
+    .skill{padding:8px 12px;border-radius:999px;background:linear-gradient(90deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));font-weight:700;border:1px solid rgba(255,255,255,0.02)}
+
+    .projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+    .card-small{padding:16px;border-radius:12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.02);transition:transform .2s ease, box-shadow .3s ease}
+    .card-small:hover{transform:translateY(-6px);box-shadow:0 8px 24px rgba(25,211,255,0.1)}
+
+    .sports-grid{display:grid;grid-template-columns:1fr 420px;gap:20px;align-items:start}
+    .sports-list{display:flex;flex-wrap:wrap;gap:8px}
+    .sport-btn{padding:10px 12px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.02);cursor:pointer;font-weight:700;transition:0.3s}
+    .sport-btn:hover{background:rgba(25,211,255,0.08)}
+    .sport-btn.active{box-shadow:0 10px 30px rgba(25,211,255,0.06);transform:translateY(-6px)}
+    .sport-detail{padding:14px;border-radius:12px;background:rgba(255,255,255,0.02);min-height:260px;border:1px solid rgba(255,255,255,0.02);display:none;gap:12px;align-items:center}
+    .sport-detail.active{display:flex;animation:fadeIn 0.6s ease}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+    .sport-detail img{width:180px;height:180px;object-fit:cover;border-radius:12px}
+    .sport-text{flex:1}
+    .fav-list{margin-top:8px;color:var(--muted)}
+
+    audio{display:none}
+  </style>
+</head>
+<body>
+  <audio id="bg-music" src="bgsong.mp3" loop></audio>
+
+  <header><nav>
+    <div class="brand">Sekhar</div>
+    <div class="navlinks">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#sports">Sports</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav></header>
+
+  <main>
+    <section id="about">
+      <h3>About Me</h3>
+      <div class="portrait"><img src="mypic.jpg" alt="Sekhar's photo"></div>
+      <p>I am <strong>Sekhar Yadav</strong>, a Class 11 student passionate about technology, AI, and data. I am currently studying Physics, Chemistry, Statistics, and English, while learning Python and web development. My goal is to work in AI and build intelligent systems that make life better.</p>
+      <p>Outside studies, I enjoy exploring sports, especially combat and motorsports. I also spend time coding fun experiments, designing minimal websites, and learning automation skills.</p>
+    </section>
+
+    <section id="skills">
+      <h3>Skills</h3>
+      <div class="skills">
+        <div class="skill">HTML</div>
+        <div class="skill">CSS</div>
+        <div class="skill">Python</div>
+        <div class="skill">Statistics</div>
+        <div class="skill">AI Basics</div>
+        <div class="skill">Problem Solving</div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h3>Projects</h3>
+      <div class="projects">
+        <a href="https://faceroasterv2.vercel.app" target="_blank" class="card-small">
+          <h4>FaceRoaster V2</h4>
+          <p>An AI-powered fun app for facial recognition and reactions.</p>
+        </a>
+        <a href="https://lifesim-by-sekharyadav.vercel.app" target="_blank" class="card-small">
+          <h4>LifeSim</h4>
+          <p>A life simulation game where your choices build your story.</p>
+        </a>
+        <a href="https://openkar.vercel.app" target="_blank" class="card-small">
+          <h4>OpenKar</h4>
+          <p>A fun experimental project showcasing web creativity.</p>
+        </a>
+      </div>
+    </section>
+
+    <section id="sports">
+      <h3>Favourite Sports</h3>
+      <div class="sports-grid">
+        <div>
+          <div class="sports-list" id="sports-list">
+            <button class="sport-btn" data-sport="mma">MMA</button>
+            <button class="sport-btn" data-sport="cricket">Cricket</button>
+            <button class="sport-btn" data-sport="formula1">Formula 1</button>
+            <button class="sport-btn" data-sport="football">Football</button>
+            <button class="sport-btn" data-sport="muaythai">Muaythai</button>
+            <button class="sport-btn" data-sport="sambo">Sambo</button>
+            <button class="sport-btn" data-sport="bjj">Brazilian jiu jutsu</button>
+            <button class="sport-btn" data-sport="motogp">Moto GP</button>
+          </div>
+        </div>
+        <div id="sports-details"></div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h3>Contact</h3>
+      <p>Email: <a href="mailto:sekharwaa07@gmail.com">sekharwaa07@gmail.com</a></p>
+      <p>Telegram: <a href="https://t.me/the_phantom_x" target="_blank">@the_phantom_x</a></p>
+      <p>GitHub: <a href="https://github.com/sekharThePythoner" target="_blank">sekharThePythoner</a> (You can see my projects)</p>
+      <p>Instagram: <a href="https://www.instagram.com/sekharwaa/" target="_blank">@sekharwaa</a></p>
+      <p>Phone: <a href="tel:+918453574472">+91 8453574472</a></p>
+    </section>
+  </main>
+
+  <script>
+    const sports = {
+      mma:{img:'mma.jpeg',desc:'Mixed Martial Arts (MMA) is a full-contact combat sport combining striking and grappling.',fav:'Khabib Nurmagomedov, Charles Oliveira, Dustin Poirier, Prime Conor, Khamzat Chimaev, Islam Makhachev, DC, Merab'},
+      cricket:{img:'cricket.jpeg',desc:'Cricket blends skill, patience, and team play — a balance of focus and creativity.',fav:'MSD Dhoni, Hardik, Rohit',team:'India'},
+      formula1:{img:'formula1.jpeg',desc:'Formula 1 is high-speed precision racing with elite drivers and engineering brilliance.',fav:'Max Verstappen'},
+      football:{img:'football.jpeg',desc:'Football unites passion, skill, and rhythm — played and loved worldwide.',fav:'Diego Maradona, R9, CR7, Neymar'},
+      muaythai:{img:'muaythai.jpeg',desc:'Muay Thai, the art of eight limbs, uses elbows, knees, fists, and shins in perfect balance.',fav:'Rodtang (Iron Man)'},
+      sambo:{img:'sambo.jpeg',desc:'Sambo combines judo and wrestling — efficient, powerful, and fast.',fav:'Fedor Emelianenko'},
+      bjj:{img:'bjj.jpeg',desc:'Brazilian Jiu Jitsu rewards technique and control — a mind game on the mat.',fav:'Charles Oliveira (Do Bronx)'},
+      motogp:{img:'motogp.jpeg',desc:'MotoGP — raw speed and daring control on two wheels.',fav:'Valentino Rossi'}
+    };
+
+    const list=document.getElementById('sports-list');
+    const container=document.getElementById('sports-details');
+
+    list.addEventListener('click',e=>{
+      if(e.target.classList.contains('sport-btn')){
+        const key=e.target.dataset.sport;
+        document.querySelectorAll('.sport-btn').forEach(b=>b.classList.remove('active'));
+        e.target.classList.add('active');
+        const s=sports[key];
+        container.innerHTML=`<div class='sport-detail active'><img src='${s.img}' alt='${key}'><div class='sport-text'><h4>${key.toUpperCase()}</h4><div>${s.desc}</div><div class='fav-list'>Favorite: ${s.fav}${s.team?` | Team: ${s.team}`:''}</div></div></div>`;
+      }
+    });
+
+    const music=document.getElementById('bg-music');
+    window.addEventListener('click',()=>{music.play();},{once:true});
+  </script>
+</body>
+</html>
