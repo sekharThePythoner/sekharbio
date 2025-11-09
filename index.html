@@ -96,6 +96,7 @@
     }
 
     audio{display:none}
+    .fade{animation:fadeIn .25s ease}
   </style>
 </head>
 <body>
@@ -177,7 +178,7 @@
       </div>
     </section>
 
-    <!-- ====== ADDED: BROS SECTION ====== -->
+    <!-- ====== ADDED: BROS SECTION (FIXED STRUCTURE) ====== -->
     <section id="bros">
       <h3>My Bros</h3>
       <div class="bros-toggle">
@@ -274,7 +275,9 @@
             <p>Address: ASSAM</p>
             <div class="badge newbies">newbies</div>
           </div>
-          <div class="id-card">
+        </div>
+
+        <div class="id-card">
           <div class="id-photo"><img src="romen.png" alt="ROMEN"></div>
           <div class="id-meta">
             <h4>ROMEN</h4>
@@ -341,10 +344,12 @@
             <p>Address: ASSAM</p>
             <div class="badge Pro">Pro</div>
           </div>
-          <div class="id-card">
-          <div class="id-photo"><img src="randheer.jpg" alt="SHIBAM"></div>
+        </div>
+
+        <div class="id-card">
+          <div class="id-photo"><img src="randheer.jpg" alt="RANDHEER"></div>
           <div class="id-meta">
-            <h4>SHIBAM</h4>
+            <h4>RANDHEER</h4>
             <p>Broship since: Aug, 2025</p>
             <p>Age: 22 (2025)</p>
             <p>Address: ASSAM</p>
@@ -394,12 +399,18 @@
     const music=document.getElementById('bg-music');
     window.addEventListener('click',()=>{music.play();},{once:true});
 
-    // ----- Bros toggle logic -----
+    // ----- Bros toggle logic (defensive) -----
     function showBros(which){
       const off = document.getElementById('bros-offline');
       const onl = document.getElementById('bros-online');
       const btnOff = document.getElementById('btn-offline');
       const btnOn = document.getElementById('btn-online');
+
+      // guard clauses so missing elements won't break the script
+      if(!off || !onl || !btnOff || !btnOn){
+        console.warn('Bros section element missing; toggle aborted.');
+        return;
+      }
 
       if(which === 'offline'){
         off.style.display = 'flex';
@@ -412,6 +423,7 @@
         btnOff.classList.remove('active');
         btnOn.classList.add('active');
       }
+
       // small animation trigger
       off.classList.remove('fade'); onl.classList.remove('fade');
       void off.offsetWidth; void onl.offsetWidth;
