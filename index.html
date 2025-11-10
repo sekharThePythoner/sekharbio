@@ -7,54 +7,96 @@
   <meta name="description" content="Sekhar Yadav — student, learner, aspiring AI dev." />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
   <style>
-  <style>
-  :root {
-    --accent:#19d3ff;
-    --accent2:#6ae3ff;
-    --muted:rgba(230,238,248,0.75);
-    --card:rgba(255,255,255,0.03);
-    --gold:#d4af37;
-    --elite:#7bd389;
-    --pro:#5aa6ff;
-    --newbie:#8b8b8b;
-  }
+    :root{
+      --bg:src="bg4.jpg";
+      --accent:#19d3ff;
+      --accent2:#6ae3ff;
+      --muted:rgba(230,238,248,0.75);
+      --card:rgba(255,255,255,0.03);
+      --gold: #d4af37;
+      --elite: #7bd389;
+      --pro: #5aa6ff;
+      --newbie: #8b8b8b;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,#050607 0%, #071018 70%);font-family:Poppins,system-ui,Arial;color:#e6eef8}
+    a{color:inherit}
 
-  *{box-sizing:border-box}
-  html,body{
-    height:100%;
-    margin:0;
-    background:url('bg4.jpg') no-repeat center center fixed;
-    background-size:cover;
-    font-family:Poppins,system-ui,Arial;
-    color:#e6eef8;
-  }
+    header{position:fixed;inset:0 0 auto 0;height:72px;display:flex;align-items:center;justify-content:center;z-index:999}
+    nav{width:100%;max-width:1200px;display:flex;justify-content:space-between;align-items:center;padding:12px 20px;border-radius:14px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,0.02)}
+    .brand{font-family:Orbitron,system-ui;font-weight:700;letter-spacing:0.6px}
+    .navlinks{display:flex;gap:12px}
+    .navlinks a{padding:8px 12px;border-radius:8px;text-decoration:none;font-weight:600}
+    .navlinks a:hover{background:linear-gradient(90deg,rgba(25,211,255,0.05),transparent)}
 
-  a{color:inherit}
-  header{
-    position:fixed;
-    inset:0 0 auto 0;
-    height:72px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    z-index:999;
-  }
-  nav{
-    width:100%;
-    max-width:1200px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:12px 20px;
-    border-radius:14px;
-    background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    backdrop-filter:blur(6px);
-    border:1px solid rgba(255,255,255,0.02);
-  }
+    main{padding-top:120px;z-index:2;position:relative}
+    section{max-width:1100px;margin:40px auto;padding:28px;border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,0.01),rgba(255,255,255,0.005));box-shadow:0 18px 60px rgba(2,8,20,0.6);border:1px solid rgba(255,255,255,0.02)}
 
-  /* rest of your CSS stays the same */
-</style>
+    .portrait{width:300px;height:300px;border-radius:18px;overflow:hidden;background:linear-gradient(180deg,#061018,#051015);display:grid;place-items:center;margin-bottom:20px}
+    .portrait img{width:100%;height:100%;object-fit:cover}
 
+    .skills{display:flex;flex-wrap:wrap;gap:10px}
+    .skill{padding:8px 12px;border-radius:999px;background:linear-gradient(90deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));font-weight:700;border:1px solid rgba(255,255,255,0.02)}
+
+    .projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+    .card-small{padding:16px;border-radius:12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.02);transition:transform .2s ease, box-shadow .3s ease}
+    .card-small:hover{transform:translateY(-6px);box-shadow:0 8px 24px rgba(25,211,255,0.1)}
+
+    .sports-grid{display:grid;grid-template-columns:1fr 420px;gap:20px;align-items:start}
+    .sports-list{display:flex;flex-wrap:wrap;gap:8px}
+    .sport-btn{padding:10px 12px;border-radius:10px;background:rgba(228, 95, 13, 0.804);border:1px solid rgba(255,255,255,0.02);cursor:pointer;font-weight:700;transition:0.3s}
+    .sport-btn:hover{background:rgba(126, 198, 10, 0.615)}
+    .sport-btn.active{box-shadow:0 10px 30px rgba(25,211,255,0.06);transform:translateY(-6px)}
+    .sport-detail{padding:14px;border-radius:12px;background:rgba(124, 13, 228, 0.584);min-height:260px;border:1px solid rgba(255,255,255,0.02);display:none;gap:12px;align-items:center}
+    .sport-detail.active{display:flex;animation:fadeIn 0.6s ease}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+    .sport-detail img{width:180px;height:180px;object-fit:cover;border-radius:12px}
+    .sport-text{flex:1}
+    .fav-list{margin-top:8px;color:var(--muted)}
+
+    /* ----- Bros Section styles (added) ----- */
+    .bros-toggle{display:flex;gap:12px;justify-content:center;margin-bottom:18px}
+    .bros-btn{padding:10px 14px;border-radius:12px;background:rgba(161, 13, 13, 0.665);border:1px solid rgba(255,255,255,0.03);cursor:pointer;font-weight:800;letter-spacing:0.6px}
+    .bros-btn.active{box-shadow:0 12px 30px rgba(149, 90, 11, 0.441);transform:translateY(-4px)}
+    .bros-note{color:var(--muted);text-align:center;margin-bottom:12px;font-weight:600}
+
+    .bros-grid{display:flex;flex-wrap:wrap;gap:18px;justify-content:center}
+    .id-card{
+      width:240px;
+      background:linear-gradient(180deg, rgba(201, 25, 25, 0.51), rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.02);
+      border-radius:12px;
+      padding:12px;
+      text-align:left;
+      transition:transform .18s ease, box-shadow .25s ease;
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+    }
+    .id-card:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(0,0,0,0.6)}
+    .id-photo{width:86px;height:86px;border-radius:10px;overflow:hidden;flex:0 0 86px;background:#0a0a0a}
+    .id-photo img{width:100%;height:100%;object-fit:cover;display:block}
+    .id-meta{flex:1}
+    .id-meta h4{margin:0 0 6px 0;color:var(--accent2);font-size:1.05rem}
+    .id-meta p{margin:4px 0;font-size:0.88rem;color:var(--muted)}
+    .badge{
+      display:inline-block;padding:6px 10px;border-radius:999px;font-weight:800;margin-top:8px;font-size:0.78rem;
+    }
+    .badge.Supreme{background:var(--gold);color:#071018}
+    .badge.Elite{background:var(--elite);color:#071018}
+    .badge.Pro{background:var(--pro);color:#071018}
+    .badge.newbies{background:var(--newbie);color:#071018}
+
+    /* responsive tweaks */
+    @media (max-width:720px){
+      .sports-grid{grid-template-columns:1fr}
+      .id-card{width:100%}
+      .portrait{width:220px;height:220px}
+      .sport-detail img{width:140px;height:140px}
+    }
+
+    audio{display:none}
+    .fade{animation:fadeIn .3s ease}
   </style>
 </head>
 <body>
@@ -398,9 +440,6 @@
   </script>
 </body>
 </html>
-
-
-
 
 
 
