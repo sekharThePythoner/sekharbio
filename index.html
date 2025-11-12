@@ -1,103 +1,198 @@
-:root{
-  --bg-1: #050607;
-  --bg-2: #071018;
-  --accent: #19d3ff;
-  --accent-2: #6ae3ff;
-  --muted: rgba(230,238,248,0.72);
-  --card: rgba(255,255,255,0.03);
-  --glass: rgba(255,255,255,0.02);
-  --glass-2: rgba(255,255,255,0.012);
-  --neon: rgba(25,211,255,0.12);
-}
-*{box-sizing:border-box}
-html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg-1) 0%, var(--bg-2) 70%);font-family:Poppins,system-ui,Arial;color:#e6eef8;line-height:1.45}
-a{color:inherit}
-#bg-particles{
-  position:fixed;inset:0;z-index:0;pointer-events:none;
-  background-image:
-    radial-gradient(rgba(25,211,255,0.03) 1px, transparent 1px),
-    radial-gradient(rgba(106,227,255,0.02) 1px, transparent 1px);
-  background-size:120px 120px, 200px 200px;
-  opacity:0.6;mix-blend-mode:overlay;
-}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sekhar — Personal Biography</title>
+  <meta name="description" content="Sekhar Yadav — student, learner, aspiring AI dev." />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Particle background -->
+  <div id="bg-particles" aria-hidden="true"></div>
 
-/* Header */
-header{position:fixed;inset:0 0 auto 0;height:72px;display:flex;align-items:center;justify-content:center;z-index:50;padding:12px}
-.nav-inner{width:100%;max-width:1200px;display:flex;justify-content:space-between;align-items:center;padding:10px 18px;border-radius:14px;background:linear-gradient(90deg,var(--glass),transparent);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,0.02)}
-.brand{font-family:Orbitron,system-ui;font-weight:700;letter-spacing:0.6px;font-size:1.25rem;color:var(--accent)}
-.navlinks{display:flex;gap:12px}
-.navlinks a{padding:8px 12px;border-radius:8px;text-decoration:none;font-weight:600;transition:all .18s}
-.navlinks a:hover{background:linear-gradient(90deg,rgba(25,211,255,0.04),transparent);transform:translateY(-2px)}
+  <!-- Music player (top-right) -->
+  <div id="music-player" role="region" aria-label="Background music controls">
+    <button id="prev-btn" title="Previous">⏮</button>
+    <button id="play-btn" title="Play/Pause">▶</button>
+    <button id="next-btn" title="Next">⏭</button>
+    <button id="mute-btn" title="Mute/Unmute">🔊</button>
+    <div id="track-name">No track loaded</div>
+  </div>
 
-/* Music player top-right */
-#music-player{
-  position:fixed;right:16px;top:12px;z-index:60;background:linear-gradient(180deg,var(--glass),var(--glass-2));padding:8px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);display:flex;gap:8px;align-items:center;backdrop-filter:blur(6px)
-}
-#music-player button{background:transparent;border:0;color:var(--muted);font-size:16px;cursor:pointer;padding:6px;border-radius:8px}
-#music-player button:hover{color:var(--accent);transform:translateY(-2px)}
-#track-name{font-size:0.85rem;color:var(--muted);min-width:160px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  <header>
+    <nav class="nav-inner">
+      <div class="brand">Sekhar</div>
+      <div class="navlinks">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#sports">Sports</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
 
-/* Main layout */
-main{padding-top:110px;z-index:2;position:relative;max-width:1100px;margin:0 auto;padding-bottom:80px}
-.card{margin:28px 14px;padding:20px;border-radius:14px;background:linear-gradient(180deg,var(--card),transparent);box-shadow:0 20px 60px rgba(2,8,20,0.6);border:1px solid rgba(255,255,255,0.02);position:relative;z-index:2}
-.hero{display:flex;gap:22px;align-items:center}
-.portrait{width:260px;height:260px;border-radius:14px;overflow:hidden;background:linear-gradient(180deg,#061018,#051015);display:grid;place-items:center;flex:0 0 260px;border:1px solid rgba(255,255,255,0.02)}
-.portrait img{width:100%;height:100%;object-fit:cover}
+  <main>
+    <section id="about" class="card">
+      <div class="hero">
+        <div class="portrait">
+          <img src="mypic.jpg" alt="Sekhar's photo" id="portrait-img">
+        </div>
+        <div class="hero-text">
+          <h1>Sekhar Yadav</h1>
+          <p class="muted">Class 11 • Aspiring AI dev • Python & web enthusiast</p>
+          <p>I build small AI experiments, websites and tools. Currently studying Physics, Chemistry, Statistics and English while learning Python & AI.</p>
 
-/* hero text */
-.hero-text h1{margin:0;font-size:1.7rem;color:var(--accent-2)}
-.muted{color:var(--muted)}
-.small{font-size:0.85rem}
-.goal-card{margin-top:12px;padding:12px;border-radius:10px;background:linear-gradient(90deg,rgba(25,211,255,0.02),transparent);border:1px solid rgba(255,255,255,0.02)}
-.goal-item{display:flex;gap:12px;align-items:center}
-.goal-thumb{width:60px;height:40px;object-fit:cover;border-radius:6px}
+          <div class="goal-card">
+            <strong>Goal:</strong>
+            <div class="goal-item">
+              <img src="bmw_goal.jpg" alt="BMW M5 (placeholder)" class="goal-thumb">
+              <div><b>BMW M5</b><div class="muted small">Dream car — tracking progress</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-/* quote box */
-.quote-box{margin-top:18px;padding:14px;border-radius:10px;background:linear-gradient(90deg,rgba(255,255,255,0.01),transparent);cursor:pointer;border:1px solid rgba(255,255,255,0.02)}
-.quote-box:hover{box-shadow:0 10px 30px rgba(25,211,255,0.04)}
-#quote-text{font-weight:700;font-size:1rem}
+      <div class="quote-box" id="quote-box" title="Click for a new quote">
+        <div id="quote-text">Click here for a quote</div>
+        <div class="quote-click-hint muted">Click to get a new Vives quote</div>
+      </div>
+    </section>
 
-/* skills grid */
-.skills-grid{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}
-.skill-card{width:120px;padding:12px;border-radius:10px;background:rgba(255,255,255,0.02);display:flex;flex-direction:column;align-items:center;gap:10px;border:1px solid rgba(255,255,255,0.02);transition:transform .18s}
-.skill-card img{width:56px;height:56px;object-fit:contain}
-.skill-card:hover{transform:translateY(-6px);box-shadow:0 12px 36px rgba(25,211,255,0.04)}
-.skill-name{font-weight:700}
+    <section id="skills" class="card">
+      <h2>Skills</h2>
+      <div class="skills-grid">
+        <!-- placeholders — drop the images with the same filenames -->
+        <div class="skill-card">
+          <img src="html.png" alt="HTML">
+          <div class="skill-name">HTML</div>
+        </div>
+        <div class="skill-card">
+          <img src="css.png" alt="CSS">
+          <div class="skill-name">CSS</div>
+        </div>
+        <div class="skill-card">
+          <img src="py.png" alt="Python">
+          <div class="skill-name">Python</div>
+        </div>
+        <div class="skill-card">
+          <img src="ai.png" alt="AI">
+          <div class="skill-name">AI Basics</div>
+        </div>
+        <div class="skill-card">
+          <img src="ps.png" alt="Photoshop">
+          <div class="skill-name">Photoshop</div>
+        </div>
+      </div>
+    </section>
 
-/* projects */
-.projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:12px}
-.project{padding:12px;border-radius:10px;background:rgba(255,255,255,0.01);text-decoration:none;border:1px solid rgba(255,255,255,0.02)}
-.project h3{margin:0 0 6px 0}
-.project p{margin:0;color:var(--muted)}
+    <section id="projects" class="card">
+      <h2>Projects</h2>
+      <div class="projects">
+        <!-- keep your links — I fixed markup & added small description style -->
+        <a href="https://facedetectorbysekhar.vercel.app/" target="_blank" class="project">
+          <h3>FaceRoaster V2</h3>
+          <p class="muted">AI-powered fun app for facial reactions.</p>
+        </a>
 
-/* sports */
-.sports-grid{display:grid;grid-template-columns:1fr 360px;gap:18px;align-items:start}
-.sports-buttons{display:flex;flex-wrap:wrap;gap:8px}
-.sport-btn{padding:10px 12px;border-radius:8px;background:linear-gradient(90deg,var(--glass),transparent);border:1px solid rgba(255,255,255,0.02);cursor:pointer;font-weight:700}
-.sport-btn.active{box-shadow:0 12px 36px rgba(25,211,255,0.05);transform:translateY(-6px)}
-.sports-details{padding:12px;border-radius:10px;background:linear-gradient(90deg,var(--glass),transparent);min-height:160px;border:1px solid rgba(255,255,255,0.02)}
-.sport-detail{display:flex;gap:12px;align-items:flex-start}
-.sport-detail img{width:140px;height:140px;object-fit:cover;border-radius:8px}
-.sport-text h4{margin:0 0 6px 0}
+        <a href="https://lifesim-by-sekharyadav.vercel.app" target="_blank" class="project">
+          <h3>LifeSim</h3>
+          <p class="muted">Life simulation choices & consequences.</p>
+        </a>
 
-/* bros */
-.bros-toggle{display:flex;gap:8px;margin-bottom:12px}
-.bros-btn{padding:8px 12px;border-radius:8px;background:linear-gradient(90deg,var(--glass),transparent);border:1px solid rgba(255,255,255,0.02);cursor:pointer}
-.bros-btn.active{box-shadow:0 10px 30px rgba(25,211,255,0.05);transform:translateY(-4px)}
-.bros-grid{display:flex;flex-wrap:wrap;gap:12px}
-.id-card{width:220px;background:linear-gradient(180deg, rgba(201, 25, 25, 0.15), rgba(255,255,255,0.01));border-radius:10px;padding:10px;display:flex;gap:10px;align-items:center}
-.id-photo{width:72px;height:72px;border-radius:8px;overflow:hidden;background:#0a0a0a}
-.id-photo img{width:100%;height:100%;object-fit:cover}
-.id-meta h4{margin:0;color:var(--accent-2)}
+        <a href="https://openkar.vercel.app" target="_blank" class="project">
+          <h3>OpenKar</h3>
+          <p class="muted">Creative web experiments.</p>
+        </a>
 
-/* hidden helper */
-.hidden{display:none}
+        <a href="https://nirmala-saga-v1.vercel.app/" target="_blank" class="project">
+          <h3>nirmalA taai</h3>
+          <p class="muted">Experimental web game.</p>
+        </a>
 
-/* small screens */
-@media (max-width:900px){
-  .sports-grid{grid-template-columns:1fr}
-  .hero{flex-direction:column;align-items:center;text-align:center}
-  .portrait{flex:0 0 200px;width:200px;height:200px}
-  #music-player{right:10px;top:80px}
-  main{padding-top:140px}
-}
+        <a href="https://bmwxyadav.vercel.app/" target="_blank" class="project">
+          <h3>bmw X ai</h3>
+          <p class="muted">Creative BMW + AI concept.</p>
+        </a>
+
+        <a href="https://text-to-speech-three-pearl.vercel.app/" target="_blank" class="project">
+          <h3>Text to Speech</h3>
+          <p class="muted">A personal TTS tool made for a friend.</p>
+        </a>
+      </div>
+    </section>
+
+    <section id="sports" class="card">
+      <h2>Favourite Sports</h2>
+      <div class="sports-grid">
+        <div class="sports-buttons" id="sports-list">
+          <button class="sport-btn" data-sport="mma">MMA</button>
+          <button class="sport-btn" data-sport="cricket">Cricket</button>
+          <button class="sport-btn" data-sport="formula1">Formula 1</button>
+          <button class="sport-btn" data-sport="football">Football</button>
+          <button class="sport-btn" data-sport="muaythai">Muaythai</button>
+          <button class="sport-btn" data-sport="sambo">Sambo</button>
+          <button class="sport-btn" data-sport="bjj">Brazilian Jiu Jitsu</button>
+          <button class="sport-btn" data-sport="motogp">Moto GP</button>
+        </div>
+
+        <div id="sports-details" class="sports-details">
+          <div class="sport-placeholder muted">Click a sport to see details</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="bros" class="card">
+      <h2>My Bros</h2>
+      <div class="bros-toggle">
+        <button id="btn-offline" class="bros-btn active">Offline</button>
+        <button id="btn-online" class="bros-btn">Online</button>
+      </div>
+
+      <div id="bros-offline" class="bros-grid">
+        <!-- keep original cards as-is; you can replace images -->
+        <!-- Example single id-card; others are in original site — paste rest if needed -->
+        <div class="id-card">
+          <div class="id-photo"><img src="sayon.jpg" alt="SAHAN"></div>
+          <div class="id-meta">
+            <h4>SAHAN</h4>
+            <p class="muted">Broship since: 2014 • Age: 17 (2025)</p>
+            <div class="badge Supreme">Supreme</div>
+          </div>
+        </div>
+
+        <!-- copy the other id-card blocks from your original file into this div or keep as is -->
+      </div>
+
+      <div id="bros-online" class="bros-grid hidden">
+        <!-- online bros -->
+        <div class="id-card">
+          <div class="id-photo"><img src="chitrangsh1.png" alt="CHITRANGSH"></div>
+          <div class="id-meta">
+            <h4>CHITRANGSH</h4>
+            <p class="muted">Broship since: Aug, 2024 • Age: 20 (2025)</p>
+            <div class="badge Supreme">Supreme</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="card">
+      <h2>Contact</h2>
+      <p>Email: <a href="mailto:sekharwaa07@gmail.com">sekharwaa07@gmail.com</a></p>
+      <p>Telegram: <a href="https://t.me/the_phantom_x" target="_blank">@the_phantom_x</a></p>
+      <p>GitHub: <a href="https://github.com/sekharThePythoner" target="_blank">sekharThePythoner</a></p>
+      <p>Instagram: <a href="https://www.instagram.com/sekharwaa/" target="_blank">@sekharwaa</a></p>
+      <p>Phone: <a href="tel:+918453574472">+91 8453574472</a> <span class="muted small">(WhatsApp only)</span></p>
+      <p class="muted small">Drop assets in the same folder (or /assets/) and update paths if needed.</p>
+    </section>
+  </main>
+
+  <!-- audio element is controlled by JS via playlist -->
+  <audio id="bg-audio"></audio>
+
+  <script src="scripts.js"></script>
+</body>
+</html>
