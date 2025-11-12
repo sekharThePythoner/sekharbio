@@ -6,23 +6,73 @@
   <title>Sekhar — Personal Biography</title>
   <meta name="description" content="Sekhar Yadav — student, learner, aspiring AI dev." />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <style>
+    :root{
+      --accent:#19d3ff;
+      --accent2:#6ae3ff;
+      --muted:rgba(230,238,248,0.75);
+      --card:rgba(255,255,255,0.03);
+      --glass: rgba(255,255,255,0.02);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,#050607 0%, #071018 70%);font-family:Poppins,system-ui,Arial;color:#e6eef8}
+    a{color:inherit;text-decoration:none}
+    header{position:fixed;inset:0 0 auto 0;height:72px;display:flex;align-items:center;justify-content:center;z-index:999}
+    nav{width:100%;max-width:1200px;display:flex;justify-content:space-between;align-items:center;padding:12px 20px;border-radius:14px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,0.02)}
+    .brand{font-family:Orbitron,system-ui;font-weight:700;letter-spacing:0.6px}
+    .navlinks{display:flex;gap:12px}
+    .navlinks a{padding:8px 12px;border-radius:8px;text-decoration:none;font-weight:600}
+    main{padding-top:120px;z-index:2;position:relative;max-width:1100px;margin:0 auto;padding-bottom:80px}
+    .card{margin:28px 14px;padding:20px;border-radius:14px;background:linear-gradient(180deg,var(--card),transparent);box-shadow:0 20px 60px rgba(2,8,20,0.6);border:1px solid rgba(255,255,255,0.02);position:relative;z-index:2}
+    .portrait{width:260px;height:260px;border-radius:14px;overflow:hidden;background:linear-gradient(180deg,#061018,#051015);display:grid;place-items:center;flex:0 0 260px;border:1px solid rgba(255,255,255,0.02)}
+    .portrait img{width:100%;height:100%;object-fit:cover}
+    .hero{display:flex;gap:22px;align-items:center}
+    .hero-text h1{margin:0;font-size:1.7rem;color:var(--accent2)}
+    .muted{color:var(--muted)}
+    .skills-grid{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}
+    .skill-card{width:120px;padding:12px;border-radius:10px;background:rgba(255,255,255,0.02);display:flex;flex-direction:column;align-items:center;gap:10px;border:1px solid rgba(255,255,255,0.02);transition:transform .18s}
+    .skill-card img{width:56px;height:56px;object-fit:contain}
+    .projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:12px}
+    .project{padding:12px;border-radius:10px;background:rgba(255,255,255,0.01);text-decoration:none;border:1px solid rgba(255,255,255,0.02)}
+    .sports-grid{display:grid;grid-template-columns:1fr 360px;gap:18px;align-items:start}
+    .sports-buttons{display:flex;flex-wrap:wrap;gap:8px}
+    .sport-btn{padding:10px 12px;border-radius:8px;background:linear-gradient(90deg,var(--glass),transparent);border:1px solid rgba(255,255,255,0.02);cursor:pointer;font-weight:700}
+    .sport-btn.active{box-shadow:0 12px 36px rgba(25,211,255,0.05);transform:translateY(-6px)}
+    .sports-details{padding:12px;border-radius:10px;background:linear-gradient(90deg,var(--glass),transparent);min-height:160px;border:1px solid rgba(255,255,255,0.02)}
+    .bros-grid{display:flex;flex-wrap:wrap;gap:12px}
+    .id-card{width:220px;background:linear-gradient(180deg, rgba(201, 25, 25, 0.15), rgba(255,255,255,0.01));border-radius:10px;padding:10px;display:flex;gap:10px;align-items:center}
+    .id-photo{width:72px;height:72px;border-radius:8px;overflow:hidden;background:#0a0a0a}
+    .id-photo img{width:100%;height:100%;object-fit:cover}
+    .id-meta h4{margin:0;color:var(--accent2)}
+    /* music player */
+    #music-player{position:fixed;right:16px;top:12px;z-index:60;background:linear-gradient(180deg,var(--glass),rgba(255,255,255,0.01));padding:8px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);display:flex;gap:8px;align-items:center;backdrop-filter:blur(6px)}
+    #music-player button{background:transparent;border:0;color:var(--muted);font-size:16px;cursor:pointer;padding:6px;border-radius:8px}
+    #track-name{font-size:0.85rem;color:var(--muted);min-width:140px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .hidden{display:none}
+    @media (max-width:900px){
+      .sports-grid{grid-template-columns:1fr}
+      .hero{flex-direction:column;align-items:center;text-align:center}
+      .portrait{flex:0 0 200px;width:200px;height:200px}
+      #music-player{right:10px;top:80px}
+      main{padding-top:140px}
+    }
+    /* small flash */
+    @keyframes flashit{0%{box-shadow:0 0 0 rgba(25,211,255,0)}50%{box-shadow:0 0 24px rgba(25,211,255,0.14)}100%{box-shadow:0 0 0 rgba(25,211,255,0)}}
+    .flash{animation:flashit .45s ease}
+  </style>
 </head>
 <body>
-  <!-- Particle background -->
-  <div id="bg-particles" aria-hidden="true"></div>
-
-  <!-- Music player (top-right) -->
-  <div id="music-player" role="region" aria-label="Background music controls">
+  <!-- music controls -->
+  <div id="music-player" aria-label="Music controls">
     <button id="prev-btn" title="Previous">⏮</button>
     <button id="play-btn" title="Play/Pause">▶</button>
     <button id="next-btn" title="Next">⏭</button>
-    <button id="mute-btn" title="Mute/Unmute">🔊</button>
-    <div id="track-name">No track loaded</div>
+    <button id="mute-btn" title="Mute">🔊</button>
+    <div id="track-name">—</div>
   </div>
 
   <header>
-    <nav class="nav-inner">
+    <nav>
       <div class="brand">Sekhar</div>
       <div class="navlinks">
         <a href="#about">About</a>
@@ -37,90 +87,48 @@
   <main>
     <section id="about" class="card">
       <div class="hero">
-        <div class="portrait">
-          <img src="mypic.jpg" alt="Sekhar's photo" id="portrait-img">
-        </div>
+        <div class="portrait"><img src="mypic.jpg" alt="Sekhar portrait"></div>
         <div class="hero-text">
           <h1>Sekhar Yadav</h1>
           <p class="muted">Class 11 • Aspiring AI dev • Python & web enthusiast</p>
-          <p>I build small AI experiments, websites and tools. Currently studying Physics, Chemistry, Statistics and English while learning Python & AI.</p>
+          <p>I build AI experiments, websites and tools. Studying Physics, Chemistry, Statistics and English while learning Python & AI.</p>
 
-          <div class="goal-card">
+          <div style="margin-top:12px;padding:10px;border-radius:10px;background:linear-gradient(90deg,rgba(25,211,255,0.02),transparent);border:1px solid rgba(255,255,255,0.02)">
             <strong>Goal:</strong>
-            <div class="goal-item">
-              <img src="bmw_goal.jpg" alt="BMW M5 (placeholder)" class="goal-thumb">
+            <div style="display:flex;gap:10px;align-items:center;margin-top:8px">
+              <img src="bmw_goal.jpg" alt="BMW M5" style="width:60px;height:40px;object-fit:cover;border-radius:6px">
               <div><b>BMW M5</b><div class="muted small">Dream car — tracking progress</div></div>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="quote-box" id="quote-box" title="Click for a new quote">
-        <div id="quote-text">Click here for a quote</div>
-        <div class="quote-click-hint muted">Click to get a new Vives quote</div>
+      <div id="quote-box" style="margin-top:18px;padding:14px;border-radius:10px;background:linear-gradient(90deg,rgba(255,255,255,0.01),transparent);cursor:pointer;border:1px solid rgba(255,255,255,0.02)">
+        <div id="quote-text" style="font-weight:700">Click here for a quote</div>
+        <div style="color:var(--muted);font-size:0.9rem;margin-top:6px">Click to get a new Vives quote</div>
       </div>
     </section>
 
     <section id="skills" class="card">
       <h2>Skills</h2>
       <div class="skills-grid">
-        <!-- placeholders — drop the images with the same filenames -->
-        <div class="skill-card">
-          <img src="html.png" alt="HTML">
-          <div class="skill-name">HTML</div>
-        </div>
-        <div class="skill-card">
-          <img src="css.png" alt="CSS">
-          <div class="skill-name">CSS</div>
-        </div>
-        <div class="skill-card">
-          <img src="py.png" alt="Python">
-          <div class="skill-name">Python</div>
-        </div>
-        <div class="skill-card">
-          <img src="ai.png" alt="AI">
-          <div class="skill-name">AI Basics</div>
-        </div>
-        <div class="skill-card">
-          <img src="ps.png" alt="Photoshop">
-          <div class="skill-name">Photoshop</div>
-        </div>
+        <div class="skill-card"><img src="html.png" alt="HTML"><div class="skill-name">HTML</div></div>
+        <div class="skill-card"><img src="css.png" alt="CSS"><div class="skill-name">CSS</div></div>
+        <div class="skill-card"><img src="py.png" alt="Python"><div class="skill-name">Python</div></div>
+        <div class="skill-card"><img src="ai.png" alt="AI"><div class="skill-name">AI Basics</div></div>
+        <div class="skill-card"><img src="ps.png" alt="Photoshop"><div class="skill-name">Photoshop</div></div>
       </div>
     </section>
 
     <section id="projects" class="card">
       <h2>Projects</h2>
       <div class="projects">
-        <!-- keep your links — I fixed markup & added small description style -->
-        <a href="https://facedetectorbysekhar.vercel.app/" target="_blank" class="project">
-          <h3>FaceRoaster V2</h3>
-          <p class="muted">AI-powered fun app for facial reactions.</p>
-        </a>
-
-        <a href="https://lifesim-by-sekharyadav.vercel.app" target="_blank" class="project">
-          <h3>LifeSim</h3>
-          <p class="muted">Life simulation choices & consequences.</p>
-        </a>
-
-        <a href="https://openkar.vercel.app" target="_blank" class="project">
-          <h3>OpenKar</h3>
-          <p class="muted">Creative web experiments.</p>
-        </a>
-
-        <a href="https://nirmala-saga-v1.vercel.app/" target="_blank" class="project">
-          <h3>nirmalA taai</h3>
-          <p class="muted">Experimental web game.</p>
-        </a>
-
-        <a href="https://bmwxyadav.vercel.app/" target="_blank" class="project">
-          <h3>bmw X ai</h3>
-          <p class="muted">Creative BMW + AI concept.</p>
-        </a>
-
-        <a href="https://text-to-speech-three-pearl.vercel.app/" target="_blank" class="project">
-          <h3>Text to Speech</h3>
-          <p class="muted">A personal TTS tool made for a friend.</p>
-        </a>
+        <a href="https://facedetectorbysekhar.vercel.app/" target="_blank" class="project"><h3>FaceRoaster V2</h3><p class="muted">AI-powered fun app for facial reactions.</p></a>
+        <a href="https://lifesim-by-sekharyadav.vercel.app" target="_blank" class="project"><h3>LifeSim</h3><p class="muted">Life simulation choices & consequences.</p></a>
+        <a href="https://openkar.vercel.app" target="_blank" class="project"><h3>OpenKar</h3><p class="muted">Creative web experiments.</p></a>
+        <a href="https://nirmala-saga-v1.vercel.app/" target="_blank" class="project"><h3>nirmalA taai</h3><p class="muted">Experimental web game.</p></a>
+        <a href="https://bmwxyadav.vercel.app/" target="_blank" class="project"><h3>bmw X ai</h3><p class="muted">Creative BMW + AI concept.</p></a>
+        <a href="https://text-to-speech-three-pearl.vercel.app/" target="_blank" class="project"><h3>Text to Speech</h3><p class="muted">Personal TTS tool for a friend.</p></a>
       </div>
     </section>
 
@@ -135,47 +143,24 @@
           <button class="sport-btn" data-sport="muaythai">Muaythai</button>
           <button class="sport-btn" data-sport="sambo">Sambo</button>
           <button class="sport-btn" data-sport="bjj">Brazilian Jiu Jitsu</button>
-          <button class="sport-btn" data-sport="motogp">Moto GP</button>
+          <button class="sport-btn" data-sport="motogp">MotoGP</button>
         </div>
-
-        <div id="sports-details" class="sports-details">
-          <div class="sport-placeholder muted">Click a sport to see details</div>
-        </div>
+        <div id="sports-details" class="sports-details"><div class="muted">Click a sport to see details</div></div>
       </div>
     </section>
 
     <section id="bros" class="card">
       <h2>My Bros</h2>
-      <div class="bros-toggle">
+      <div style="display:flex;gap:8px;margin-bottom:12px">
         <button id="btn-offline" class="bros-btn active">Offline</button>
         <button id="btn-online" class="bros-btn">Online</button>
       </div>
-
       <div id="bros-offline" class="bros-grid">
-        <!-- keep original cards as-is; you can replace images -->
-        <!-- Example single id-card; others are in original site — paste rest if needed -->
-        <div class="id-card">
-          <div class="id-photo"><img src="sayon.jpg" alt="SAHAN"></div>
-          <div class="id-meta">
-            <h4>SAHAN</h4>
-            <p class="muted">Broship since: 2014 • Age: 17 (2025)</p>
-            <div class="badge Supreme">Supreme</div>
-          </div>
-        </div>
-
-        <!-- copy the other id-card blocks from your original file into this div or keep as is -->
+        <!-- keep your originals; example card below -->
+        <div class="id-card"><div class="id-photo"><img src="sayon.jpg" alt="Sahan"></div><div class="id-meta"><h4>SAHAN</h4><p class="muted">Broship since: 2014 • Age: 17 (2025)</p><div style="display:inline-block;padding:6px 10px;border-radius:999px;background:#d4af37;color:#071018;font-weight:800">Supreme</div></div></div>
       </div>
-
       <div id="bros-online" class="bros-grid hidden">
-        <!-- online bros -->
-        <div class="id-card">
-          <div class="id-photo"><img src="chitrangsh1.png" alt="CHITRANGSH"></div>
-          <div class="id-meta">
-            <h4>CHITRANGSH</h4>
-            <p class="muted">Broship since: Aug, 2024 • Age: 20 (2025)</p>
-            <div class="badge Supreme">Supreme</div>
-          </div>
-        </div>
+        <div class="id-card"><div class="id-photo"><img src="chitrangsh1.png" alt="Chitrangsh"></div><div class="id-meta"><h4>CHITRANGSH</h4><p class="muted">Broship since Aug, 2024</p></div></div>
       </div>
     </section>
 
@@ -184,15 +169,148 @@
       <p>Email: <a href="mailto:sekharwaa07@gmail.com">sekharwaa07@gmail.com</a></p>
       <p>Telegram: <a href="https://t.me/the_phantom_x" target="_blank">@the_phantom_x</a></p>
       <p>GitHub: <a href="https://github.com/sekharThePythoner" target="_blank">sekharThePythoner</a></p>
-      <p>Instagram: <a href="https://www.instagram.com/sekharwaa/" target="_blank">@sekharwaa</a></p>
-      <p>Phone: <a href="tel:+918453574472">+91 8453574472</a> <span class="muted small">(WhatsApp only)</span></p>
-      <p class="muted small">Drop assets in the same folder (or /assets/) and update paths if needed.</p>
+      <p class="muted small">Put assets in same folder or /assets/ and update paths if needed.</p>
     </section>
   </main>
 
-  <!-- audio element is controlled by JS via playlist -->
-  <audio id="bg-audio"></audio>
+  <!-- audio element controlled by JS -->
+  <audio id="bg-audio" crossorigin="anonymous"></audio>
 
-  <script src="scripts.js"></script>
+  <script>
+    // Quotes
+    const quotes = [
+"Discipline is doing what needs to be done, even when you don’t feel like doing it.",
+"Motivation fades; discipline stays.",
+"You don’t need more motivation — you need more self-control.",
+"Discipline means training your mind to obey you, not your emotions.",
+"When motivation dies, discipline takes over.",
+"The difference between the successful and the average is consistency.",
+"Don’t chase motivation; build habits.",
+"Discipline is the bridge between goals and reality.",
+"Do it tired. Do it bored. Do it anyway.",
+"Your mood doesn’t matter; your actions do.",
+"Motivation gets you started, discipline keeps you going.",
+"The best version of you doesn’t depend on feelings — it depends on discipline.",
+"Be stronger than your excuses.",
+"One hour of discipline beats ten hours of inspiration.",
+"Comfort kills dreams; discipline builds them.",
+"You don’t rise to the level of motivation — you fall to the level of discipline.",
+"Real strength is doing it when no one’s watching.",
+"You can’t be motivated every day, but you can be disciplined every day.",
+"Losers wait for inspiration; winners work through boredom.",
+"Motivation is temporary; discipline is permanent.",
+"Get addicted to progress, not motivation.",
+"Small daily actions create massive results over time.",
+"Be the person who shows up no matter what.",
+"Emotion says stop; discipline says go.",
+"Success doesn’t need motivation — it needs consistency.",
+"Your future self is watching your discipline right now.",
+"Discipline is self-respect in action.",
+"Learn to love the grind; it’s where greatness grows.",
+"Discipline doesn’t care about your feelings — only your results.",
+"Motivation is for beginners; discipline is for finishers.",
+"Nobody is coming to save you — train yourself.",
+"Consistency will do what motivation never could.",
+"You can rest when it’s done.",
+"Control your mind, or it will control you.",
+"Motivation is a spark; discipline is the fire that keeps burning.",
+"Discipline is choosing what you want most over what you want now.",
+"Comfort is a slow killer.",
+"Every time you skip the hard work, you train your mind to quit.",
+"The grind won’t love you back — but it will reward you.",
+"Motivation makes noise; discipline makes results.",
+"Build a routine so strong that it doesn’t need motivation.",
+"Winners don’t wait to feel ready.",
+"Discipline doesn’t shout — it quietly builds empires.",
+"Your success depends on what you do when you don’t want to do it.",
+"You’ll never always be motivated — but you can always be disciplined.",
+"Pain teaches discipline; comfort teaches nothing.",
+"Stay consistent — even slow progress beats quitting.",
+"Discipline turns goals into habits and habits into results.",
+"The grind is lonely, but the success is loud.",
+"Don’t feel it. Just do it."
+    ];
+    const quoteBox = document.getElementById('quote-box');
+    const quoteText = document.getElementById('quote-text');
+    function showRandomQuote(){
+      const i = Math.floor(Math.random()*quotes.length);
+      quoteText.textContent = quotes[i];
+      quoteBox.classList.add('flash');
+      setTimeout(()=>quoteBox.classList.remove('flash'),420);
+    }
+    quoteBox.addEventListener('click', showRandomQuote);
+
+    // Sports data
+    const sports = {
+      mma:{img:'mma.jpeg',desc:'Mixed Martial Arts (MMA) is a full-contact combat sport combining striking and grappling.',fav:'Khabib, Charles Oliveira, Dustin Poirier, Conor, Khamzat, Islam'},
+      cricket:{img:'cricket.jpeg',desc:'Cricket blends skill, patience, and team play — a balance of focus and creativity.',fav:'MSD Dhoni, Hardik, Rohit',team:'India'},
+      formula1:{img:'formula1.jpeg',desc:'Formula 1 is high-speed precision racing with elite drivers and engineering brilliance.',fav:'Max Verstappen'},
+      football:{img:'football.jpeg',desc:'Football unites passion, skill, and rhythm — played and loved worldwide.',fav:'Maradona, Ronaldo, Neymar'},
+      muaythai:{img:'muaythai.jpeg',desc:'Muay Thai, the art of eight limbs, uses elbows, knees, fists, and shins in perfect balance.',fav:'Rodtang'},
+      sambo:{img:'sambo.jpeg',desc:'Sambo combines judo and wrestling — efficient, powerful, and fast.',fav:'Fedor Emelianenko'},
+      bjj:{img:'bjj.jpeg',desc:'Brazilian Jiu Jitsu rewards technique and control — a mind game on the mat.',fav:'Do Bronx'},
+      motogp:{img:'motogp.jpeg',desc:'MotoGP — raw speed and daring control on two wheels.',fav:'Valentino Rossi'}
+    };
+    document.getElementById('sports-list').addEventListener('click',e=>{
+      if(e.target.classList.contains('sport-btn')){
+        const key=e.target.dataset.sport;
+        document.querySelectorAll('.sport-btn').forEach(b=>b.classList.remove('active'));
+        e.target.classList.add('active');
+        const s=sports[key];
+        document.getElementById('sports-details').innerHTML = `
+          <div class="sport-detail">
+            <img src="${s.img}" alt="${key}" style="width:140px;height:140px;border-radius:8px;object-fit:cover;margin-right:12px">
+            <div class="sport-text"><h4>${key.toUpperCase()}</h4><div>${s.desc}</div><div class="muted small" style="margin-top:8px">Favorite: ${s.fav}${s.team?` | Team: ${s.team}`:''}</div></div>
+          </div>
+        `;
+      }
+    });
+
+    // Bros toggle
+    document.getElementById('btn-offline').addEventListener('click', ()=> showBros('offline'));
+    document.getElementById('btn-online').addEventListener('click', ()=> showBros('online'));
+    function showBros(which){
+      const off=document.getElementById('bros-offline'), onl=document.getElementById('bros-online');
+      if(which==='offline'){ off.classList.remove('hidden'); onl.classList.add('hidden'); }
+      else { off.classList.add('hidden'); onl.classList.remove('hidden'); }
+    }
+
+    // Music player
+    const audio = document.getElementById('bg-audio');
+    const playBtn = document.getElementById('play-btn');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const muteBtn = document.getElementById('mute-btn');
+    const trackName = document.getElementById('track-name');
+
+    const playlist = [
+      {src:'bgsong1.mp3', title:'bgsong1.mp3'},
+      {src:'bgsong.mp3', title:'bgsong.mp3'},
+      {src:'bgsong2.mp3', title:'bgsong2.mp3'},
+      {src:'bgsong3.mp3', title:'bgsong3.mp3'},
+      {src:'bgsong4.mp4', title:'bgsong4.mp4'}
+    ];
+    let current = 0;
+    function loadTrack(i){
+      if(!playlist[i]) return;
+      audio.src = playlist[i].src;
+      trackName.textContent = playlist[i].title;
+    }
+    function playTrack(){ audio.play().then(()=> playBtn.textContent='⏸').catch(()=> playBtn.textContent='▶'); }
+    function pauseTrack(){ audio.pause(); playBtn.textContent='▶'; }
+    playBtn.addEventListener('click', ()=> { if(audio.paused) playTrack(); else pauseTrack(); });
+    prevBtn.addEventListener('click', ()=> { current=(current-1+playlist.length)%playlist.length; loadTrack(current); playTrack(); });
+    nextBtn.addEventListener('click', ()=> { current=(current+1)%playlist.length; loadTrack(current); playTrack(); });
+    muteBtn.addEventListener('click', ()=> { audio.muted = !audio.muted; muteBtn.textContent = audio.muted ? '🔇' : '🔊'; });
+    audio.addEventListener('ended', ()=> { current=(current+1)%playlist.length; loadTrack(current); playTrack(); });
+    loadTrack(current);
+    // allow play after user interaction (most browsers require gesture)
+    let firstGesture = false;
+    function onFirstGesture(){ if(!firstGesture){ audio.play().then(()=> playBtn.textContent='⏸').catch(()=>{}); firstGesture=true; } window.removeEventListener('pointerdown',onFirstGesture); }
+    window.addEventListener('pointerdown', onFirstGesture);
+
+    // small accessibility
+    playBtn.addEventListener('keydown', e=>{ if(e.code==='Space'){ e.preventDefault(); playBtn.click(); } });
+  </script>
 </body>
 </html>
