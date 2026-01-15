@@ -53,8 +53,9 @@ const quotes = [
 ];
 
 // Quote box logic
-const quoteBox = document.getElementById('quote-box');
-const quoteText = document.getElementById('quote-text');
+const quoteBox = document.getElementById('quote-display');
+const quoteText = document.getElementById('quote-display');
+
 
 function showRandomQuote(){
   const idx = Math.floor(Math.random()*quotes.length);
@@ -63,7 +64,7 @@ function showRandomQuote(){
   setTimeout(()=>quoteBox.classList.remove('flash'),420);
 }
 
-quoteBox.addEventListener('click', showRandomQuote);
+
 
 // --- Sports data (kept same as original) ---
 const sports = {
@@ -222,3 +223,41 @@ style.innerHTML = `
   @keyframes flashit{0%{box-shadow:0 0 0 rgba(25,211,255,0)}50%{box-shadow:0 0 24px rgba(25,211,255,0.14)}100%{box-shadow:0 0 0 rgba(25,211,255,0)}}
 `;
 document.head.appendChild(style);
+// TYPEWRITER HERO
+const heroLine = "Building skills. Not excuses. Only progress.";
+let hi = 0;
+setInterval(()=>{
+  const el = document.getElementById("typewriter");
+  if(!el) return;
+  el.textContent = heroLine.slice(0,hi++);
+  if(hi > heroLine.length) hi = 0;
+}, 100);
+
+// NEON HOVER
+document.querySelectorAll('.card-small,.id-card').forEach(card=>{
+  card.addEventListener("mouseenter",()=>{
+    card.style.boxShadow="0 0 30px rgba(25,211,255,0.6)";
+  });
+  card.addEventListener("mouseleave",()=>{
+    card.style.boxShadow="";
+  });
+});
+
+// VISITOR COUNTER
+let visits = localStorage.getItem("visits") || 1200;
+visits++;
+localStorage.setItem("visits", visits);
+const vEl = document.getElementById("visits");
+if(vEl) vEl.textContent = visits;
+
+// PAGE FADE IN
+document.body.style.opacity=0;
+window.onload=()=>{
+  let o=0;
+  const f=setInterval(()=>{
+    o+=0.04;
+    document.body.style.opacity=o;
+    if(o>=1) clearInterval(f);
+  },30);
+};
+
