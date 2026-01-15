@@ -100,4 +100,143 @@ main{padding-top:110px;z-index:2;position:relative;max-width:1100px;margin:0 aut
   .portrait{flex:0 0 200px;width:200px;height:200px}
   #music-player{right:10px;top:80px}
   main{padding-top:140px}
+
 }
+const canvas = document.getElementById("fx");
+const ctx = canvas.getContext("2d");
+canvas.style.position="fixed";
+canvas.style.inset="0";
+canvas.style.zIndex="1";
+canvas.style.pointerEvents="none";
+
+function resize(){
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+window.addEventListener("resize",resize);
+resize();
+
+let particles = Array.from({length:120},()=>({
+  x:Math.random()*canvas.width,
+  y:Math.random()*canvas.height,
+  vx:(Math.random()-0.5)*0.5,
+  vy:(Math.random()-0.5)*0.5,
+  r:Math.random()*2+0.5
+}));
+
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach(p=>{
+    p.x+=p.vx;
+    p.y+=p.vy;
+    if(p.x<0||p.x>canvas.width) p.vx*=-1;
+    if(p.y<0||p.y>canvas.height) p.vy*=-1;
+    ctx.fillStyle="rgba(25,211,255,0.6)";
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fill();
+  });
+  requestAnimationFrame(draw);
+}
+draw();
+const glow = document.createElement("div");
+glow.style.position="fixed";
+glow.style.width="120px";
+glow.style.height="120px";
+glow.style.borderRadius="50%";
+glow.style.background="radial-gradient(circle, rgba(25,211,255,.4), transparent)";
+glow.style.pointerEvents="none";
+glow.style.zIndex="999";
+document.body.appendChild(glow);
+
+window.addEventListener("mousemove",e=>{
+  glow.style.left = e.clientX-60+"px";
+  glow.style.top = e.clientY-60+"px";
+});
+document.querySelectorAll(".card-small,.id-card").forEach(card=>{
+  card.addEventListener("mousemove",e=>{
+    const r = card.getBoundingClientRect();
+    const x = e.clientX - r.left;
+    const y = e.clientY - r.top;
+    const rx = (y - r.height/2)/20;
+    const ry = (x - r.width/2)/20;
+    card.style.transform = `rotateX(${ -rx }deg) rotateY(${ ry }deg) scale(1.05)`;
+  });
+  card.addEventListener("mouseleave",()=>{
+    card.style.transform="rotateX(0) rotateY(0) scale(1)";
+  });
+});
+document.addEventListener("keydown",e=>{
+  if(e.key==="g"){
+    document.body.style.filter="hue-rotate(120deg) contrast(1.4)";
+    setTimeout(()=>document.body.style.filter="",300);
+  }
+});
+audio.addEventListener("play",()=>{
+  setInterval(()=>{
+    document.body.style.transform=`translate(${(Math.random()-0.5)*2}px, ${(Math.random()-0.5)*2}px)`;
+    setTimeout(()=>document.body.style.transform="",40);
+  },120);
+});
+window.addEventListener("touchstart",e=>{
+  const t = e.touches[0];
+  const ripple = document.createElement("div");
+  ripple.style.position="fixed";
+  ripple.style.left=t.clientX+"px";
+  ripple.style.top=t.clientY+"px";
+  ripple.style.width="10px";
+  ripple.style.height="10px";
+  ripple.style.border="2px solid #19d3ff";
+  ripple.style.borderRadius="50%";
+  ripple.style.transform="translate(-50%,-50%)";
+  ripple.style.opacity="1";
+  ripple.style.zIndex="9999";
+  ripple.style.pointerEvents="none";
+  document.body.appendChild(ripple);
+
+  let s=1;
+  const anim=setInterval(()=>{
+    s+=3;
+    ripple.style.width=s+"px";
+    ripple.style.height=s+"px";
+    ripple.style.opacity-=0.03;
+    if(s>120){
+      clearInterval(anim);
+      ripple.remove();
+    }
+  },16);
+});
+const header = document.querySelector("header");
+setInterval(()=>{
+  header.style.boxShadow = `0 0 ${Math.random()*25}px rgba(25,211,255,0.6)`;
+},300);
+const scan = document.getElementById("scanline");
+scan.style.position="fixed";
+scan.style.top="0";
+scan.style.left="0";
+scan.style.width="100%";
+scan.style.height="4px";
+scan.style.background="linear-gradient(90deg,transparent,#19d3ff,transparent)";
+scan.style.opacity="0.7";
+scan.style.zIndex="999";
+
+let pos=0;
+setInterval(()=>{
+  pos+=2;
+  scan.style.transform=`translateY(${pos}px)`;
+  if(pos>window.innerHeight) pos=0;
+},16);
+window.addEventListener("deviceorientation",e=>{
+  const x = e.gamma || 0;
+  const y = e.beta || 0;
+  document.body.style.transform = `rotateY(${x/50}deg) rotateX(${-y/50}deg)`;
+});
+let glitch=0;
+const g = setInterval(()=>{
+  document.body.style.filter=`hue-rotate(${Math.random()*360}deg)`;
+  glitch++;
+  if(glitch>10){
+    document.body.style.filter="";
+    clearInterval(g);
+  }
+},80);
