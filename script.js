@@ -223,41 +223,88 @@ style.innerHTML = `
   @keyframes flashit{0%{box-shadow:0 0 0 rgba(25,211,255,0)}50%{box-shadow:0 0 24px rgba(25,211,255,0.14)}100%{box-shadow:0 0 0 rgba(25,211,255,0)}}
 `;
 document.head.appendChild(style);
-// TYPEWRITER HERO
-const heroLine = "Building skills. Not excuses. Only progress.";
-let hi = 0;
-setInterval(()=>{
-  const el = document.getElementById("typewriter");
-  if(!el) return;
-  el.textContent = heroLine.slice(0,hi++);
-  if(hi > heroLine.length) hi = 0;
-}, 100);
+// ---------- SAFE CYBER FX PACK ----------
 
-// NEON HOVER
-document.querySelectorAll('.card-small,.id-card').forEach(card=>{
+// Neon hover
+document.querySelectorAll(".card-small,.id-card").forEach(card=>{
   card.addEventListener("mouseenter",()=>{
-    card.style.boxShadow="0 0 30px rgba(25,211,255,0.6)";
+    card.style.boxShadow="0 0 25px rgba(25,211,255,0.7)";
   });
   card.addEventListener("mouseleave",()=>{
     card.style.boxShadow="";
   });
 });
 
-// VISITOR COUNTER
-let visits = localStorage.getItem("visits") || 1200;
-visits++;
-localStorage.setItem("visits", visits);
+// Visitor counter
+let v = localStorage.getItem("visits") || 1000;
+v++;
+localStorage.setItem("visits",v);
 const vEl = document.getElementById("visits");
-if(vEl) vEl.textContent = visits;
+if(vEl) vEl.textContent = v;
 
-// PAGE FADE IN
-document.body.style.opacity=0;
-window.onload=()=>{
-  let o=0;
-  const f=setInterval(()=>{
-    o+=0.04;
-    document.body.style.opacity=o;
-    if(o>=1) clearInterval(f);
-  },30);
-};
+// Typewriter
+const tw = document.getElementById("typewriter");
+if(tw){
+  const msg="BUILDING. GRINDING. EVOLVING.";
+  let i=0;
+  setInterval(()=>{
+    tw.textContent = msg.slice(0,i++);
+    if(i>msg.length) i=0;
+  },120);
+}
+
+// Canvas particles
+const c = document.getElementById("fx");
+if(c){
+  const ctx = c.getContext("2d");
+  c.width=window.innerWidth;
+  c.height=window.innerHeight;
+  window.addEventListener("resize",()=>{
+    c.width=window.innerWidth;
+    c.height=window.innerHeight;
+  });
+
+  const p=[];
+  for(let i=0;i<80;i++){
+    p.push({
+      x:Math.random()*c.width,
+      y:Math.random()*c.height,
+      vx:(Math.random()-0.5),
+      vy:(Math.random()-0.5)
+    });
+  }
+
+  function anim(){
+    ctx.clearRect(0,0,c.width,c.height);
+    p.forEach(o=>{
+      o.x+=o.vx;
+      o.y+=o.vy;
+      if(o.x<0||o.x>c.width) o.vx*=-1;
+      if(o.y<0||o.y>c.height) o.vy*=-1;
+      ctx.fillStyle="rgba(25,211,255,.6)";
+      ctx.fillRect(o.x,o.y,2,2);
+    });
+    requestAnimationFrame(anim);
+  }
+  anim();
+}
+
+// Scanline
+const scan = document.getElementById("scanline");
+if(scan){
+  scan.style.position="fixed";
+  scan.style.left="0";
+  scan.style.top="0";
+  scan.style.width="100%";
+  scan.style.height="3px";
+  scan.style.background="linear-gradient(90deg,transparent,#19d3ff,transparent)";
+  scan.style.zIndex="9999";
+  let y=0;
+  setInterval(()=>{
+    y+=2;
+    if(y>window.innerHeight) y=0;
+    scan.style.transform=`translateY(${y}px)`;
+  },16);
+}
+
 
