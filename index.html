@@ -1,634 +1,166 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Sekhar — Personal Biography</title>
-  <meta name="description" content="Sekhar Yadav — student, learner, aspiring AI dev." />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --accent:#19d3ff;
-      --accent2:#6ae3ff;
-      --muted:rgba(230,238,248,0.75);
-      --card:rgba(255,255,255,0.03);
-      --gold: #d4af37;
-      --elite: #7bd389;
-      --pro: #5aa6ff;
-      --newbie: #8b8b8b;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;background:linear-gradient(180deg,#050607 0%, #071018 70%);font-family:Poppins,system-ui,Arial;color:#e6eef8}
-    a{color:inherit}
-    header{position:fixed;inset:0 0 auto 0;height:72px;display:flex;align-items:center;justify-content:center;z-index:999}
-    nav{width:100%;max-width:1200px;display:flex;justify-content:space-between;align-items:center;padding:12px 20px;border-radius:14px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,0.02)}
-    .brand{font-family:Orbitron,system-ui;font-weight:700;letter-spacing:0.6px}
-    .navlinks{display:flex;gap:12px}
-    .navlinks a{padding:8px 12px;border-radius:8px;text-decoration:none;font-weight:600}
-    .navlinks a:hover{background:linear-gradient(90deg,rgba(25,211,255,0.05),transparent)}
-    main{padding-top:120px;z-index:2;position:relative}
-    section{max-width:1100px;margin:40px auto;padding:28px;border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,0.01),rgba(255,255,255,0.005));box-shadow:0 18px 60px rgba(2,8,20,0.6);border:1px solid rgba(255,255,255,0.02)}
-    .portrait{width:300px;height:300px;border-radius:18px;overflow:hidden;background:linear-gradient(180deg,#061018,#051015);display:grid;place-items:center;margin-bottom:20px}
-    .portrait img{width:100%;height:100%;object-fit:cover}
-    .skills{display:flex;flex-wrap:wrap;gap:10px}
-    .skill{padding:8px 12px;border-radius:999px;background:linear-gradient(90deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));font-weight:700;border:1px solid rgba(255,255,255,0.02)}
-    .projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
-    .card-small{padding:16px;border-radius:12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.02);transition:transform .2s ease, box-shadow .3s ease}
-    .card-small:hover{transform:translateY(-6px);box-shadow:0 8px 24px rgba(25,211,255,0.1)}
-    .sports-grid{display:grid;grid-template-columns:1fr 420px;gap:20px;align-items:start}
-    .sports-list{display:flex;flex-wrap:wrap;gap:8px}
-    .sport-btn{padding:10px 12px;border-radius:10px;background:rgba(30, 136, 171, 0.804);border:1px solid rgb(16, 27, 2);cursor:pointer;font-weight:700;transition:0.3s}
-    .sport-btn:hover{background:rgba(0, 0, 0, 0.615)}
-    .sport-btn.active{box-shadow:0 10px 30px rgba(7, 178, 235, 0.887);transform:translateY(-6px)}
-    .sport-detail{padding:14px;border-radius:12px;background:rgba(0, 0, 0, 0.767);min-height:260px;border:1px solid rgb(238, 241, 6);display:none;gap:12px;align-items:center}
-    .sport-detail.active{display:flex;animation:fadeIn 0.6s ease}
-    @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-    .sport-detail img{width:180px;height:180px;object-fit:cover;border-radius:12px}
-    .sport-text{flex:1}
-    .fav-list{margin-top:8px;color:var(--muted)}
-    /* ----- Bros Section styles ----- */
-    .bros-toggle{display:flex;gap:12px;justify-content:center;margin-bottom:18px}
-    .bros-btn{padding:10px 14px;border-radius:12px;background:rgba(161, 13, 13, 0.665);border:1px solid rgba(255,255,255,0.03);cursor:pointer;font-weight:800;letter-spacing:0.6px}
-    .bros-btn.active{box-shadow:0 12px 30px rgba(149, 90, 11, 0.441);transform:translateY(-4px)}
-    .bros-note{color:var(--muted);text-align:center;margin-bottom:12px;font-weight:600}
-    .bros-grid{display:flex;flex-wrap:wrap;gap:18px;justify-content:center}
-    .id-card{
-      width:240px;
-      background:linear-gradient(180deg, rgba(201, 25, 25, 0.51), rgba(255,255,255,0.01));
-      border:1px solid rgba(255,255,255,0.02);
-      border-radius:12px;
-      padding:12px;
-      text-align:left;
-      transition:transform .18s ease, box-shadow .25s ease;
-      display:flex;
-      gap:10px;
-      align-items:flex-start;
-    }
-    .id-card:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(0,0,0,0.6)}
-    .id-photo{width:86px;height:86px;border-radius:10px;overflow:hidden;flex:0 0 86px;background:#0a0a0a}
-    .id-photo img{width:100%;height:100%;object-fit:cover;display:block}
-    .id-meta{flex:1}
-    .id-meta h4{margin:0 0 6px 0;color:var(--accent2);font-size:1.05rem}
-    .id-meta p{margin:4px 0;font-size:0.88rem;color:var(--muted)}
-    .badge{
-      display:inline-block;padding:6px 10px;border-radius:999px;font-weight:800;margin-top:8px;font-size:0.78rem;
-    }
-    .badge.Supreme{background:var(--gold);color:#071018}
-    .badge.Elite{background:var(--elite);color:#071018}
-    .badge.Pro{background:var(--pro);color:#071018}
-    .badge.newbies{background:var(--newbie);color:#071018}
-    /* Quote section */
-    .quote-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.02)}
-    .quote-display{min-height:64px;padding:12px;border-radius:8px;background:rgba(0,0,0,0.25);width:100%;text-align:center;font-weight:700;display:flex;align-items:center;justify-content:center;color:var(--muted)}
-    .quote-controls{display:flex;gap:10px;align-items:center}
-    .btn{padding:8px 12px;border-radius:8px;background:linear-gradient(90deg,rgba(25,211,255,0.06),transparent);border:1px solid rgba(255,255,255,0.02);cursor:pointer;font-weight:700}
-    .music-controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-    /* responsive tweaks */
-    @media (max-width:720px){
-      .sports-grid{grid-template-columns:1fr}
-      .id-card{width:100%}
-      .portrait{width:220px;height:220px}
-      .sport-detail img{width:140px;height:140px}
-    }
-    audio{display:none}
-    .fade{animation:fadeIn .3s ease}
-    p.tap-note{margin:8px 20px;color:var(--muted);font-weight:700}
-  </style>
+<meta charset="utf-8">
+<title>Sekhar – Cyber Bio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+html,body{
+  margin:0;
+  background:#050607;
+  color:#e6eef8;
+  font-family:Poppins;
+}
+section{
+  max-width:1100px;
+  margin:40px auto;
+  background:#0a1018;
+  padding:30px;
+  border-radius:16px;
+}
+header{
+  position:fixed;
+  top:0;left:0;right:0;
+  background:#071018cc;
+  backdrop-filter:blur(6px);
+  z-index:10;
+}
+nav{
+  max-width:1100px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  padding:15px;
+}
+a{color:white;text-decoration:none}
+.card-small,.id-card{
+  background:#111;
+  padding:15px;
+  border-radius:12px;
+  margin:10px;
+  display:inline-block;
+}
+#fx{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+}
+#scanline{
+  position:fixed;
+  top:0;left:0;width:100%;height:3px;
+  background:linear-gradient(90deg,transparent,#19d3ff,transparent);
+  z-index:1000;
+  pointer-events:none;
+}
+main{padding-top:100px;position:relative;z-index:1}
+.btn{
+  padding:10px 15px;
+  border:1px solid #19d3ff;
+  border-radius:10px;
+  background:none;
+  color:white;
+  cursor:pointer;
+}
+</style>
 </head>
 
-
 <body>
- <canvas id="fx"></canvas>
+
+<canvas id="fx"></canvas>
 <div id="scanline"></div>
 
+<header>
+<nav>
+  <b>Sekhar</b>
+  <div>
+    <a href="#about">About</a> |
+    <a href="#projects">Projects</a> |
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+</header>
 
-  <!-- single audio element, src set dynamically -->
-  <audio id="bg-music" loop></audio>
-  <header>
-    <nav>
-      <div class="brand">Sekhar</div>
-      <div class="navlinks">
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#sports">Sports</a>
-        <a href="#contact">Contact</a>
-      </div>
-    </nav>
-  </header>
+<main>
 
-  <main>
-   <section style="
-  min-height:90vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  background:radial-gradient(circle at top,#19d3ff33,#050607);
-  border-bottom:1px solid rgba(255,255,255,0.1);
-">
-  <h1 style="font-family:Orbitron;font-size:3.5rem;letter-spacing:4px;margin:0">
-    SEKHAR YADAV
-  </h1>
-  <h3 style="color:#19d3ff;margin-top:10px">
-    Shiv Bakt • Coder • Fighter Mindset
-  </h3>
+<section style="text-align:center;min-height:80vh">
+  <h1 style="font-family:Orbitron;font-size:3rem">SEKHAR YADAV</h1>
   <p id="typewriter"></p>
-  <p id="typewriter" style="color:#aaa;font-weight:700;font-size:1.1rem;margin-top:20px"></p>
-  <div style="margin-top:30px;display:flex;gap:15px;flex-wrap:wrap;justify-content:center">
-    <a href="#projects" class="btn">See My Work</a>
-    <a href="#contact" class="btn">Contact Me</a>
-  </div>
-</section>
- 
-    <section id="about">
-      <h3>About Me</h3>
-      <div class="portrait"><img src="me.jpg" alt="Sekhar's photo"></div>
-      <p>I am <strong>Sekhar Yadav</strong>, a Class 11 student passionate about technology, AI, and data. I am currently studying Physics, Chemistry, Statistics, and English, while learning Python and web development. My goal is to work in AI and build intelligent systems that make life better.</p>
-      <p>Outside studies, I enjoy exploring sports, especially combat and motorsports. I also spend time coding fun experiments, designing minimal websites, and learning automation skills.
-      </p>
-
-      <!-- Music controls -->
-      <div style="margin-top:18px" class="quote-wrap">
-        <div style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
-          <div style="flex:1;min-width:220px">
-            <div style="font-weight:800;margin-bottom:8px">Background music — choose track</div>
-            <div class="music-controls">
-              <select id="music-select" class="btn" aria-label="choose background music">
-                <option value="bgsong.mp3">1</option>
-                <option value="bgsong1.mp3"> 2</option>
-                <option value="bgsong2.mp3">3</option>
-                <option value="bgsong3.mp3">4</option>
-                <option value="bgsong4.mp3">5</option>
-              </select>
-              <button id="play-toggle" class="btn">Play</button>
-              <button id="pause-btn" class="btn">Pause</button>
-            </div>
-            <p class="tap-note">Tap anywhere once to allow audio playback (required by browsers).</p>
-          </div>
-
-          <!-- Quote mini section inside about for visibility -->
-          <div style="min-width:320px;flex:1">
-            <div style="font-weight:800;margin-bottom:8px">Discipline Quotes</div>
-            <div class="quote-display" id="quote-display">Click "Get Quote" to see one.</div>
-            <div class="quote-controls" style="justify-content:center;margin-top:8px">
-              <button id="get-quote" class="btn">Get Quote</button>
-              <button id="shuffle-quotes" class="btn">Shuffle</button>
-              <button id="reset-quotes" class="btn">Reset</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="skills">
-      <h3>Skills</h3>
-      <div class="skills">
-        <div class="skill">HTML</div>
-        <div class="skill">CSS</div>
-        <div class="skill">Python</div>
-        <div class="skill">Statistics</div>
-        <div class="skill">AI Basics</div>
-        <div class="skill">Problem Solving</div>
-      </div>
-    </section>
-
-    <section id="projects">
-      <h3>Projects</h3>
-      <div class="projects">
-        <a href="https://facedetectorbysekhar.vercel.app/" target="_blank" class="card-small">
-          <h4>FaceRoaster V2</h4>
-          <p>An AI-powered fun app for facial recognition and reactions.</p>
-        </a>
-        <a href="https://lifesim-by-sekharyadav.vercel.app" target="_blank" class="card-small">
-          <h4>LifeSim</h4>
-          <p>A life simulation game where your choices build your story.</p>
-        </a>
-        <a href="https://openkar.vercel.app" target="_blank" class="card-small">
-          <h4>OpenKar</h4>
-          <p>A fun experimental project showcasing web creativity.</p>
-        </a>
-        <a href="https://nirmala-saga-v1.vercel.app/" target="_blank" class="card-small">
-          <h4>nirmalA taai</h4>
-          <p>A fun experimental game showcasing web creativity.</p>
-        </a>
-        <a href="https://bmwxyadav.vercel.app/" target="_blank" class="card-small">
-          <h4>bmw X ai</h4>
-          <p>A fun and creative website</p>
-        </a>
-        <a href="https://text-to-speech-three-pearl.vercel.app/" target="_blank" class="card-small">
-          <h4>Text to Speech</h4>
-          <p>This special tool I made for my beloved friend Sahan.</p>
-        </a>
-      </div>
-    </section>
-
-    <section id="sports">
-      <h3>Favourite Sports</h3>
-      <div class="sports-grid">
-        <div>
-          <div class="sports-list" id="sports-list">
-            <button class="sport-btn" data-sport="mma">MMA</button>
-            <button class="sport-btn" data-sport="cricket">Cricket</button>
-            <button class="sport-btn" data-sport="formula1">Formula 1</button>
-            <button class="sport-btn" data-sport="football">Football</button>
-            <button class="sport-btn" data-sport="muaythai">Muaythai</button>
-            <button class="sport-btn" data-sport="sambo">Sambo</button>
-            <button class="sport-btn" data-sport="bjj">Brazilian Jiu Jitsu</button>
-            <button class="sport-btn" data-sport="motogp">Moto GP</button>
-          </div>
-        </div>
-        <div id="sports-details"></div>
-      </div>
-    </section>
-
-    <!-- BROS SECTION (same as you had) -->
-    <section id="bros">
-  <h3>My Bros</h3>
-  <div class="bros-toggle">
-    <button id="btn-offline" class="bros-btn active" onclick="showBros('offline')">Offline Bros</button>
-    <button id="btn-online" class="bros-btn" onclick="showBros('online')">Online Bros</button>
-  </div>
-  <div class="bros-note">BADGE ARE ACC. TO FRNDSHIP YRS</div>
-
-  <!-- Offline bros -->
-  <div id="bros-offline" class="bros-grid" style="display:flex;">
-    <div class="id-card">
-      <div class="id-photo"><img src="sayon.jpg" alt="SAHAN"></div>
-      <div class="id-meta">
-        <h4>SAHAN</h4>
-        <p>Broship since: 2014</p>
-        <p>Age: 17 (2025)</p>
-        <p>Address: ASSAM</p>
-        <div class="badge Supreme">Supreme</div>
-      </div>
-    </div>
-
-    <div class="id-card">
-      <div class="id-photo"><img src="subinoy.png" alt="SUBINOY"></div>
-      <div class="id-meta">
-        <h4>SUBINOY</h4>
-        <p>Broship since: 2014</p>
-        <p>Age: 17 (2025)</p>
-        <p>Address: ASSAM</p>
-        <div class="badge Supreme">Supreme</div>
-      </div>
-    </div>
-
-    <div class="id-card">
-      <div class="id-photo"><img src="ankit.jpg" alt="ANKIT"></div>
-      <div class="id-meta">
-        <h4>ANKIT</h4>
-        <p>Broship since: 2016</p>
-        <p>Age: 17 (2025)</p>
-        <p>Address: ASSAM</p>
-        <div class="badge Elite">Elite</div>
-      </div>
-    </div>
-
-    <div class="id-card">
-      <div class="id-photo"><img src="priyo.png" alt="PRIYOJEET"></div>
-      <div class="id-meta">
-        <h4>PRIYOJEET</h4>
-        <p>Broship since: 2023</p>
-        <p>Age: 18 (2025)</p>
-        <p>Address: ASSAM</p>
-        <div class="badge Pro">Pro</div>
-      </div>
-    </div>
-
-    <div class="id-card">
-      <div class="id-photo"><img src="vikash.png" alt="VIKASH"></div>
-      <div class="id-meta">
-        <h4>VIKASH</h4>
-        <p>Broship since: 2025</p>
-        <p>Age: 16 (2025)</p>
-        <p>Address: ASSAM</p>
-        <div class="badge newbies">newbies</div>
-      </div>
-    </div>
-
-    <div class="id-card">
-      <div class="id-photo"><img src="soom.png" alt="SOOM"></div>
-      <div class="id-meta">
-        <h4>SOOM</h4>
-        <p>Broship since: 2025</p>
-        <p>Age: 16 (2025)</p>
-        <p>Address: ASSAM</p>
-        <div class="badge newbies">newbies</div>
-      </div>
-    </div>
-
-    <div class="id-card">
-      <div class="id-photo"><img src="pinak.png" alt="PINAK"></div>
-      <div class="id-meta">
-        <h4>PINAK</h4>
-        <p>Broship since: 2025</p>
-        <p>Age: 18 (2025)</p>
-        <p>Address: ASSAM</p>
-        <div class="badge newbies">newbies</div>
-      </div>
-    </div>
-
-    <div class="id-card">
-      <div class="id-photo"><img src="shiva.jpg" alt="SHIVA"></div>
-      <div class="id-meta">
-        <h4>SHIVA</h4>
-        <p>Broship since: 2025</p>
-        <p>Age: 17 (2025)</p>
-        <p>Address: ASSAM</p>
-        <div class="badge newbies">newbies</div>
-      </div>
-    </div>
-
-    <div class="id-card">
-      <div class="id-photo"><img src="romen.png" alt="ROMEN"></div>
-      <div class="id-meta">
-        <h4>ROMEN</h4>
-        <p>Broship since: 2025</p>
-        <p>Age: 17 (2025)</p>
-        <p>Address: ASSAM</p>
-        <div class="badge newbies">newbies</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Online bros -->
- <div id="bros-online" class="bros-grid" style="display:none;">
-
-  <div class="id-card">
-    <div class="id-photo"><img src="chitrangsh1.png" alt="CHITRANGSH"></div>
-    <div class="id-meta">
-      <h4>CHITRANGSH</h4>
-      <p>Broship since: Aug, 2024</p>
-      <p>Age: 20 (2025)</p>
-      <p>Address: West Bengal</p>
-      <div class="badge Supreme">Supreme</div>
-    </div>
-  </div>
-
-  <div class="id-card">
-    <div class="id-photo"><img src="raunak.jpg" alt="RAUNAK"></div>
-    <div class="id-meta">
-      <h4>RAUNAK</h4>
-      <p>Broship since: May, 2025</p>
-      <p>Age: 17 (2025)</p>
-      <p>Address: UTTARPRADESH</p>
-      <div class="badge Elite">Elite</div>
-    </div>
-  </div>
-
-  <div class="id-card">
-    <div class="id-photo"><img src="akshat.png" alt="Akshat"></div>
-    <div class="id-meta">
-      <h4>AKSHAT</h4>
-      <p>Broship since: June, 2025</p>
-      <p>Age: 17 (2025)</p>
-      <p>Address: UP</p>
-      <div class="badge Pro">Pro</div>
-    </div>
-  </div>
-
-  <div class="id-card">
-    <div class="id-photo"><img src="randheer.jpg" alt="RANDEER"></div>
-    <div class="id-meta">
-      <h4>RANDEER</h4>
-      <p>Broship since: June, 2025</p>
-      <p>Age: 18 (2025)</p>
-      <p>Address: Bihar</p>
-      <div class="badge Pro">Pro</div>
-    </div>
-  </div>
-     <div class="id-card">
-    <div class="id-photo"><img src="shivam1.png" alt="Shivam"></div>
-    <div class="id-meta">
-      <h4>SHIVAM</h4>
-      <p>Broship since: september, 2025</p>
-      <p>Age: 20 (2025)</p>
-      <p>Address: MUMBAI</p>
-      <div class="badge Pro">Newbies</div>
-    </div>
-  </div>
-
-
-</div>
-
+  <a class="btn" href="#projects">See Work</a>
 </section>
 
+<section id="about">
+  <h2>About Me</h2>
+  <p>Student. Coder. Future AI Engineer.</p>
+</section>
 
-    <section id="contact">
-      <h3>Contact</h3>
-      <p style="color:#19d3ff;font-weight:700">
-👁 Visitors: <span id="visits">0</span>
-</p>
+<section id="projects">
+  <h2>Projects</h2>
+  <div class="card-small">FaceRoaster</div>
+  <div class="card-small">LifeSim</div>
+  <div class="card-small">OpenKar</div>
+</section>
 
-      <p>Email: <a href="mailto:sekharwaa07@gmail.com">sekharwaa07@gmail.com</a></p>
-      <p>Telegram: <a href="https://t.me/the_phantom_x" target="_blank">@the_phantom_x</a></p>
-      <p>GitHub: <a href="https://github.com/sekharThePythoner" target="_blank">sekharThePythoner</a> (You can see my projects)</p>
-      <p>Instagram: <a href="https://www.instagram.com/sekharwaa/" target="_blank">@sekharwaa</a></p>
-      <p>Phone: <a href="tel:+918453574472">+91 8453574472</a></p>(only whatsapp msgs bruh!)
-      <p> if you want me to buy cofee : Gowala07@fam</p>
-    </section>
-  </main>
+<section id="contact">
+  <h2>Contact</h2>
+  <p>sekharwaa07@gmail.com</p>
+  <p>Visitors: <span id="visits">0</span></p>
+</section>
 
-  <script>
-    // ----- Sports data and UI (kept) -----
-    const sports = {
-      mma:{img:'mma.jpeg',desc:'Mixed Martial Arts (MMA) is a full-contact combat sport combining striking and grappling.',fav:'Khabib Nurmagomedov, Charles Oliveira, Dustin Poirier, Prime Conor, Khamzat Chimaev, Islam Makhachev, DC, Merab'},
-      cricket:{img:'cricket.jpeg',desc:'Cricket blends skill, patience, and team play — a balance of focus and creativity.',fav:'MSD Dhoni, Hardik, Rohit',team:'India'},
-      formula1:{img:'formula1.jpeg',desc:'Formula 1 is high-speed precision racing with elite drivers and engineering brilliance.',fav:'Max Verstappen'},
-      football:{img:'football.jpeg',desc:'Football unites passion, skill, and rhythm — played and loved worldwide.',fav:'Diego Maradona, R9, CR7, Neymar'},
-      muaythai:{img:'muaythai.jpeg',desc:'Muay Thai, the art of eight limbs, uses elbows, knees, fists, and shins in perfect balance.',fav:'Rodtang (Iron Man)'},
-      sambo:{img:'sambo.jpeg',desc:'Sambo combines judo and wrestling — efficient, powerful, and fast.',fav:'Fedor Emelianenko'},
-      bjj:{img:'bjj.jpeg',desc:'Brazilian Jiu Jitsu rewards technique and control — a mind game on the mat.',fav:'Charles Oliveira (Do Bronx)'},
-      motogp:{img:'motogp.jpeg',desc:'MotoGP — raw speed and daring control on two wheels.',fav:'Valentino Rossi'}
-    };
+</main>
 
-    const list=document.getElementById('sports-list');
-    const container=document.getElementById('sports-details');
+<script>
+// Typewriter
+const tw = document.getElementById("typewriter");
+const text="BUILDING. GRINDING. EVOLVING.";
+let i=0;
+setInterval(()=>{
+  tw.textContent=text.slice(0,i++);
+  if(i>text.length) i=0;
+},120);
 
-    list.addEventListener('click',e=>{
-      if(e.target.classList.contains('sport-btn')){
-        const key=e.target.dataset.sport;
-        document.querySelectorAll('.sport-btn').forEach(b=>b.classList.remove('active'));
-        e.target.classList.add('active');
-        const s=sports[key];
-        container.innerHTML=`<div class='sport-detail active'><img src='${s.img}' alt='${key}'><div class='sport-text'><h4>${key.toUpperCase()}</h4><div>${s.desc}</div><div class='fav-list'>Favorite: ${s.fav}${s.team?` | Team: ${s.team}`:''}</div></div></div>`;
-      }
-    });
+// Visitors
+let v=localStorage.getItem("visits")||1000;
+v++;
+localStorage.setItem("visits",v);
+document.getElementById("visits").textContent=v;
 
-    // ----- BG music logic (5 tracks) -----
-    const music = document.getElementById('bg-music');
-    const musicSelect = document.getElementById('music-select');
-    const playBtn = document.getElementById('play-toggle');
-    const pauseBtn = document.getElementById('pause-btn');
+// Neon hover
+document.querySelectorAll(".card-small").forEach(c=>{
+  c.onmouseenter=()=>c.style.boxShadow="0 0 25px #19d3ff";
+  c.onmouseleave=()=>c.style.boxShadow="";
+});
 
-    // ensure user interaction unlocks audio: play once on first global click
-    function enableAudioOnFirstInteraction() {
-      function unlock(){
-        if (!music.src) {
-          // set to currently selected
-          music.src = musicSelect.value;
-        }
-        music.play().catch(()=>{ /* ignore */ });
-        window.removeEventListener('click', unlock);
-      }
-      window.addEventListener('click', unlock, { once: true });
-    }
-    enableAudioOnFirstInteraction();
+// Canvas particles
+const c=document.getElementById("fx");
+const ctx=c.getContext("2d");
+function resize(){c.width=innerWidth;c.height=innerHeight}
+resize();onresize=resize;
+const p=[];
+for(let i=0;i<80;i++)p.push({x:Math.random()*c.width,y:Math.random()*c.height,vx:(Math.random()-.5),vy:(Math.random()-.5)});
+function anim(){
+  ctx.clearRect(0,0,c.width,c.height);
+  p.forEach(o=>{
+    o.x+=o.vx;o.y+=o.vy;
+    if(o.x<0||o.x>c.width)o.vx*=-1;
+    if(o.y<0||o.y>c.height)o.vy*=-1;
+    ctx.fillStyle="#19d3ff";
+    ctx.fillRect(o.x,o.y,2,2);
+  });
+  requestAnimationFrame(anim);
+}
+anim();
 
-    // when select changes, switch src and play (if currently playing)
-    musicSelect.addEventListener('change', () => {
-      const wasPlaying = !music.paused && !music.ended;
-      music.src = musicSelect.value;
-      if (wasPlaying) music.play().catch(()=>{});
-    });
+// Scanline
+let y=0;
+setInterval(()=>{
+  y+=2;if(y>innerHeight)y=0;
+  document.getElementById("scanline").style.transform=`translateY(${y}px)`;
+},16);
+</script>
 
-    playBtn.addEventListener('click', () => {
-      if (!music.src) music.src = musicSelect.value;
-      music.play().then(()=>{ playBtn.textContent = 'Playing'; }).catch(()=>{ /* privacy */ });
-    });
-    pauseBtn.addEventListener('click', () => {
-      music.pause();
-      playBtn.textContent = 'Play';
-    });
-
-    // small UI sync
-    music.addEventListener('play', () => playBtn.textContent = 'Playing');
-    music.addEventListener('pause', () => playBtn.textContent = 'Play');
-
-    // ----- Bros toggle logic (defensive) -----
-    function showBros(which){
-      const off = document.getElementById('bros-offline');
-      const onl = document.getElementById('bros-online');
-      const btnOff = document.getElementById('btn-offline');
-      const btnOn = document.getElementById('btn-online');
-      if(!off || !onl || !btnOff || !btnOn){
-        console.warn('Bros section element missing; toggle aborted.');
-        return;
-      }
-      if(which === 'offline'){
-        off.style.display = 'flex';
-        onl.style.display = 'none';
-        btnOff.classList.add('active');
-        btnOn.classList.remove('active');
-      } else {
-        off.style.display = 'none';
-        onl.style.display = 'flex';
-        btnOff.classList.remove('active');
-        btnOn.classList.add('active');
-      }
-      off.classList.remove('fade'); onl.classList.remove('fade');
-      void off.offsetWidth; void onl.offsetWidth;
-      off.classList.add('fade'); onl.classList.add('fade');
-    }
-
-    // ----- Quotes system -----
-    // Your 50 quotes exactly as provided:
-    const QUOTES = [
-      "Discipline is doing what needs to be done, even when you don’t feel like doing it.",
-      "Motivation fades; discipline stays.",
-      "You don’t need more motivation — you need more self-control.",
-      "Discipline means training your mind to obey you, not your emotions.",
-      "When motivation dies, discipline takes over.",
-      "The difference between the successful and the average is consistency.",
-      "Don’t chase motivation; build habits.",
-      "Discipline is the bridge between goals and reality.",
-      "Do it tired. Do it bored. Do it anyway.",
-      "Your mood doesn’t matter; your actions do.",
-      "Motivation gets you started, discipline keeps you going.",
-      "The best version of you doesn’t depend on feelings — it depends on discipline.",
-      "Be stronger than your excuses.",
-      "One hour of discipline beats ten hours of inspiration.",
-      "Comfort kills dreams; discipline builds them.",
-      "You don’t rise to the level of motivation — you fall to the level of discipline.",
-      "Real strength is doing it when no one’s watching.",
-      "You can’t be motivated every day, but you can be disciplined every day.",
-      "Losers wait for inspiration; winners work through boredom.",
-      "Motivation is temporary; discipline is permanent.",
-      "Get addicted to progress, not motivation.",
-      "Small daily actions create massive results over time.",
-      "Be the person who shows up no matter what.",
-      "Emotion says stop; discipline says go.",
-      "Success doesn’t need motivation — it needs consistency.",
-      "Your future self is watching your discipline right now.",
-      "Discipline is self-respect in action.",
-      "Learn to love the grind; it’s where greatness grows.",
-      "Discipline doesn’t care about your feelings — only your results.",
-      "Motivation is for beginners; discipline is for finishers.",
-      "Nobody is coming to save you — train yourself.",
-      "Consistency will do what motivation never could.",
-      "You can rest when it’s done.",
-      "Control your mind, or it will control you.",
-      "Motivation is a spark; discipline is the fire that keeps burning.",
-      "Discipline is choosing what you want most over what you want now.",
-      "Comfort is a slow killer.",
-      "Every time you skip the hard work, you train your mind to quit.",
-      "The grind won’t love you back — but it will reward you.",
-      "Motivation makes noise; discipline makes results.",
-      "Build a routine so strong that it doesn’t need motivation.",
-      "Winners don’t wait to feel ready.",
-      "Discipline doesn’t shout — it quietly builds empires.",
-      "Your success depends on what you do when you don’t want to do it.",
-      "You’ll never always be motivated — but you can always be disciplined.",
-      "Pain teaches discipline; comfort teaches nothing.",
-      "Stay consistent — even slow progress beats quitting.",
-      "Discipline turns goals into habits and habits into results.",
-      "The grind is lonely, but the success is loud.",
-      "Don’t feel it. Just do it."
-    ];
-
-    // We'll shuffle once and serve quotes in sequence; can shuffle again on demand
-    let quotePool = [];
-    function shufflePool(){
-      quotePool = QUOTES.slice();
-      for (let i = quotePool.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [quotePool[i], quotePool[j]] = [quotePool[j], quotePool[i]];
-      }
-    }
-    shufflePool();
-    let quoteIndex = 0;
-
-    const display = document.getElementById('quote-display');
-    const getQuoteBtn = document.getElementById('get-quote');
-    const shuffleBtn = document.getElementById('shuffle-quotes');
-    const resetBtn = document.getElementById('reset-quotes');
-
-    function showNextQuote(){
-      if(quotePool.length === 0) shufflePool();
-      if(quoteIndex >= quotePool.length) {
-        // all shown, reshuffle
-        shufflePool();
-        quoteIndex = 0;
-      }
-      const q = quotePool[quoteIndex++];
-      display.textContent = q;
-      // small flash animation
-      display.classList.remove('fade');
-      void display.offsetWidth;
-      display.classList.add('fade');
-    }
-
-    getQuoteBtn.addEventListener('click', showNextQuote);
-    shuffleBtn.addEventListener('click', () => { shufflePool(); quoteIndex = 0; showNextQuote(); });
-    resetBtn.addEventListener('click', () => { shufflePool(); quoteIndex = 0; display.textContent = 'Click "Get Quote" to see one.'; });
-
-    // Optional: show one quote on page load (commented)
-    // showNextQuote();
-
-  </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
