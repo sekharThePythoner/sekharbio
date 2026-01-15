@@ -1,166 +1,111 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<title>Sekhar – Cyber Bio</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
+<meta charset="UTF-8">
+<title>Sekhar — Cyber Portfolio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-
-<style>
-html,body{
-  margin:0;
-  background:#050607;
-  color:#e6eef8;
-  font-family:Poppins;
-}
-section{
-  max-width:1100px;
-  margin:40px auto;
-  background:#0a1018;
-  padding:30px;
-  border-radius:16px;
-}
-header{
-  position:fixed;
-  top:0;left:0;right:0;
-  background:#071018cc;
-  backdrop-filter:blur(6px);
-  z-index:10;
-}
-nav{
-  max-width:1100px;
-  margin:auto;
-  display:flex;
-  justify-content:space-between;
-  padding:15px;
-}
-a{color:white;text-decoration:none}
-.card-small,.id-card{
-  background:#111;
-  padding:15px;
-  border-radius:12px;
-  margin:10px;
-  display:inline-block;
-}
-#fx{
-  position:fixed;
-  inset:0;
-  z-index:0;
-  pointer-events:none;
-}
-#scanline{
-  position:fixed;
-  top:0;left:0;width:100%;height:3px;
-  background:linear-gradient(90deg,transparent,#19d3ff,transparent);
-  z-index:1000;
-  pointer-events:none;
-}
-main{padding-top:100px;position:relative;z-index:1}
-.btn{
-  padding:10px 15px;
-  border:1px solid #19d3ff;
-  border-radius:10px;
-  background:none;
-  color:white;
-  cursor:pointer;
-}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+<div id="bg-particles"></div>
 <canvas id="fx"></canvas>
 <div id="scanline"></div>
 
+<audio id="bg-audio"></audio>
+
 <header>
-<nav>
-  <b>Sekhar</b>
-  <div>
-    <a href="#about">About</a> |
-    <a href="#projects">Projects</a> |
-    <a href="#contact">Contact</a>
+  <div class="nav-inner">
+    <div class="brand">SEKHAR</div>
+    <div class="navlinks">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#sports">Sports</a>
+      <a href="#bros">Bros</a>
+      <a href="#contact">Contact</a>
+    </div>
   </div>
-</nav>
 </header>
+
+<!-- Music -->
+<div id="music-player">
+  <button id="prev-btn">⏮</button>
+  <button id="play-btn">▶</button>
+  <button id="next-btn">⏭</button>
+  <button id="mute-btn">🔊</button>
+  <span id="track-name">bgsong.mp3</span>
+</div>
 
 <main>
 
-<section style="text-align:center;min-height:80vh">
-  <h1 style="font-family:Orbitron;font-size:3rem">SEKHAR YADAV</h1>
-  <p id="typewriter"></p>
-  <a class="btn" href="#projects">See Work</a>
-</section>
+<!-- HERO -->
+<div class="card hero">
+  <div class="portrait">
+    <img src="me.jpg">
+  </div>
+  <div class="hero-text">
+    <h1>Sekhar Yadav</h1>
+    <p class="muted">Coder • Fighter Mindset • AI Builder</p>
+    <p id="typewriter"></p>
 
-<section id="about">
-  <h2>About Me</h2>
-  <p>Student. Coder. Future AI Engineer.</p>
-</section>
+    <div class="quote-box" id="quote-box">
+      <div id="quote-text">Click for discipline quote</div>
+    </div>
+  </div>
+</div>
 
-<section id="projects">
+<!-- SKILLS -->
+<div class="card" id="skills">
+  <h2>Skills</h2>
+  <div class="skills-grid">
+    <div class="skill-card"><img src="html.png"><div class="skill-name">HTML</div></div>
+    <div class="skill-card"><img src="css.png"><div class="skill-name">CSS</div></div>
+    <div class="skill-card"><img src="python.png"><div class="skill-name">Python</div></div>
+    <div class="skill-card"><img src="stats.png"><div class="skill-name">Stats</div></div>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<div class="card" id="projects">
   <h2>Projects</h2>
-  <div class="card-small">FaceRoaster</div>
-  <div class="card-small">LifeSim</div>
-  <div class="card-small">OpenKar</div>
-</section>
+  <div class="projects">
+    <a class="project" href="https://facedetectorbysekhar.vercel.app" target="_blank"><h3>FaceRoaster</h3><p>AI fun app</p></a>
+    <a class="project" href="https://lifesim-by-sekharyadav.vercel.app" target="_blank"><h3>LifeSim</h3><p>Choice based life</p></a>
+    <a class="project" href="https://openkar.vercel.app" target="_blank"><h3>OpenKar</h3><p>Web experiment</p></a>
+  </div>
+</div>
 
-<section id="contact">
-  <h2>Contact</h2>
-  <p>sekharwaa07@gmail.com</p>
-  <p>Visitors: <span id="visits">0</span></p>
-</section>
+<!-- SPORTS -->
+<div class="card" id="sports">
+  <h2>Sports</h2>
+  <div class="sports-grid">
+    <div class="sports-buttons" id="sports-list">
+      <button class="sport-btn" data-sport="mma">MMA</button>
+      <button class="sport-btn" data-sport="cricket">Cricket</button>
+      <button class="sport-btn" data-sport="formula1">F1</button>
+      <button class="sport-btn" data-sport="football">Football</button>
+      <button class="sport-btn" data-sport="bjj">BJJ</button>
+    </div>
+    <div class="sports-details" id="sports-details">
+      Select a sport
+    </div>
+  </div>
+</div>
 
-</main>
+<!-- BROS -->
+<div class="card" id="bros">
+  <h2>Bros</h2>
+  <div class="bros-toggle">
+    <button class="bros-btn active" id="btn-offline">Offline</button>
+    <button class="bros-btn" id="btn-online">Online</button>
+  </div>
 
-<script>
-// Typewriter
-const tw = document.getElementById("typewriter");
-const text="BUILDING. GRINDING. EVOLVING.";
-let i=0;
-setInterval(()=>{
-  tw.textContent=text.slice(0,i++);
-  if(i>text.length) i=0;
-},120);
+  <div class="bros-grid" id="bros-offline">
+    <div class="id-card"><div class="id-photo"><img src="sayon.jpg"></div><div class="id-meta"><h4>Sahan</h4></div></div>
+    <div class="id-card"><div class="id-photo"><img src="subinoy.png"></div><div class="id-meta"><h4>Subinoy</h4></div></div>
+  </div>
 
-// Visitors
-let v=localStorage.getItem("visits")||1000;
-v++;
-localStorage.setItem("visits",v);
-document.getElementById("visits").textContent=v;
-
-// Neon hover
-document.querySelectorAll(".card-small").forEach(c=>{
-  c.onmouseenter=()=>c.style.boxShadow="0 0 25px #19d3ff";
-  c.onmouseleave=()=>c.style.boxShadow="";
-});
-
-// Canvas particles
-const c=document.getElementById("fx");
-const ctx=c.getContext("2d");
-function resize(){c.width=innerWidth;c.height=innerHeight}
-resize();onresize=resize;
-const p=[];
-for(let i=0;i<80;i++)p.push({x:Math.random()*c.width,y:Math.random()*c.height,vx:(Math.random()-.5),vy:(Math.random()-.5)});
-function anim(){
-  ctx.clearRect(0,0,c.width,c.height);
-  p.forEach(o=>{
-    o.x+=o.vx;o.y+=o.vy;
-    if(o.x<0||o.x>c.width)o.vx*=-1;
-    if(o.y<0||o.y>c.height)o.vy*=-1;
-    ctx.fillStyle="#19d3ff";
-    ctx.fillRect(o.x,o.y,2,2);
-  });
-  requestAnimationFrame(anim);
-}
-anim();
-
-// Scanline
-let y=0;
-setInterval(()=>{
-  y+=2;if(y>innerHeight)y=0;
-  document.getElementById("scanline").style.transform=`translateY(${y}px)`;
-},16);
-</script>
-
-</body>
-</html>
+  <div class="bros-grid hidden"
